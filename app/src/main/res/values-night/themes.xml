@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Esieabot" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Esieabot" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/middle_blue_purple</item>
         <item name="colorPrimaryVariant">@color/slate_blue</item>
