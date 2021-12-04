@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/home_page"
+        android:title="@string/title_home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/control_page"
+        android:title="@string/title_control"
+        android:icon="@drawable/ic_control"/>
+
+    <item
+        android:id="@+id/settings_page"
+        android:title="@string/title_settings"
+        android:icon="@drawable/ic_settings"/>
 </menu>
