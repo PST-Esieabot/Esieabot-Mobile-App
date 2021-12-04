@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         loadFragment(HomeFragment())
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
