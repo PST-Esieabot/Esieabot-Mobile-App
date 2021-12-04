@@ -3,7 +3,7 @@
     <style name="Theme.Esieabot" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/middle_blue_purple</item>
-        <item name="colorPrimaryVariant">@color/slate_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_purple</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dark_purple</item>
@@ -12,5 +12,26 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="defaultTextStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="subtitleTextStyle" parent="defaultTextStyle">
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="titleTextStyle" parent="defaultTextStyle">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="bottomNavStyle" parent="Widget.Design.BottomNavigationView">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 </resources>
