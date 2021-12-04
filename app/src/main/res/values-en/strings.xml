@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Esieabot</string>
+
+    // Titre des pages
+    <string name="title_home">Home</string>
+    <string name="title_control">Control</string>
+    <string name="title_settings">Settings</string>
+
+    // Page d'accueil
+    <string name="home_title">esieabot</string>
+    <string name="home_robot_non_connected">Robot not connected</string>
+    <string name="home_click_to_connect">Click to connect your robot</string>
+
+    // Page de controle
+    <string name="control_camera_not_connected">Camera not connected</string>
+    <string name="control_battery_percentage">100%</string>
+    <string name="control_connection_speed">2ms</string>
+
+    // Page d'option
+    <string name="settings_language">Language : En</string>
+    <string name="settings_bug">Report a bug</string>
+    <string name="settings_rights">All rights reserved ESIEA</string>
+    <string name="settings_version">Version 1.0</string>
+</resources>
