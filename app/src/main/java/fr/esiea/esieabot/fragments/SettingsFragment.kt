@@ -9,9 +9,12 @@ import fr.esiea.esieabot.R
 import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
-import fr.esiea.esieabot.MainActivity
+import androidx.core.app.ActivityCompat.recreate
+import fr.esiea.esieabot.LocaleHelper
 
 class SettingsFragment : Fragment() {
+    private val mLanguageCode = "fr"
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
@@ -24,6 +27,17 @@ class SettingsFragment : Fragment() {
            // val intent = Intent(activity, MainActivity.class)
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
+
+        val appLang = view.findViewById<View>(R.id.app_language) as TextView
+        appLang.setOnClickListener{
+
+            LocaleHelper.setLocale(this@SettingsFragment, mLanguageCode)
+
+            //It is required to recreate the activity to reflect the change in UI.
+            recreate()
+
+        }
+
         return view
     }
 }
