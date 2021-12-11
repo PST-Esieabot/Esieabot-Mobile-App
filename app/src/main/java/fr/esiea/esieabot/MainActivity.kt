@@ -1,16 +1,14 @@
 package fr.esiea.esieabot
 
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         loadFragment(HomeFragment())
-
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         navigationView.setOnNavigationItemSelectedListener {
