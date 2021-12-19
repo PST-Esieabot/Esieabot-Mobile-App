@@ -9,6 +9,7 @@ import fr.esiea.esieabot.R
 import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -25,6 +26,7 @@ class SettingsFragment : Fragment() {
         val appLanguage = view.findViewById<TextView>(R.id.app_language)
         appLanguage.setOnClickListener {
             // TODO: Changer la langue de l'appli
+            Toast.makeText(context, "En cours de développement", Toast.LENGTH_SHORT).show()
         }
 
         return view
