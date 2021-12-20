@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import fr.esiea.esieabot.BuildConfig
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,11 +24,18 @@ class SettingsFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW, uri))
         }
 
+        // Change la langue de l'appli
         val appLanguage = view.findViewById<TextView>(R.id.app_language)
         appLanguage.setOnClickListener {
             // TODO: Changer la langue de l'appli
             Toast.makeText(context, "En cours de développement", Toast.LENGTH_SHORT).show()
         }
+
+        // Recupère le numéro de version de l'application
+        // Aller dans "AndroidManifest.xml" pour changer le numéro de version
+        val myVersionName = BuildConfig.VERSION_NAME
+        val versionName = view.findViewById<TextView>(R.id.app_versionName)
+        versionName.text = myVersionName
 
         return view
     }
