@@ -8,14 +8,9 @@ import androidx.fragment.app.Fragment
 import fr.esiea.esieabot.R
 import android.widget.TextView
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import fr.esiea.esieabot.BuildConfig
-import androidx.core.app.ActivityCompat.recreate
-import java.util.*
-
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,7 +25,6 @@ class SettingsFragment : Fragment() {
         }
 
         // Change la langue de l'appli
-
         val appLanguage = view.findViewById<TextView>(R.id.app_language)
         appLanguage.setOnClickListener {
             // TODO: Changer la langue de l'appli

@@ -24,20 +24,20 @@ class MainActivity : AppCompatActivity() {
         loadFragment(HomeFragment())
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
-        navigationView.setOnNavigationItemSelectedListener {
+        navigationView.setOnItemSelectedListener {
             when(it.itemId)
             {
                 R.id.home_page -> {
                     loadFragment(HomeFragment())
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.control_page -> {
                     loadFragment(ControlFragment())
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 R.id.settings_page -> {
                     loadFragment(SettingsFragment())
-                    return@setOnNavigationItemSelectedListener true
+                    return@setOnItemSelectedListener true
                 }
                 else -> false
             }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/app_language"
@@ -13,7 +14,7 @@
         style="@style/defaultTextStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
     <TextView
@@ -25,7 +26,7 @@
         app:layout_constraintBottom_toTopOf="@+id/app_rights"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/app_rights"
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_rights"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toTopOf="@+id/app_version"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_version"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -56,7 +57,7 @@
         android:layout_height="wrap_content"
         android:text="@string/settings_versionName"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/app_version" />
 
