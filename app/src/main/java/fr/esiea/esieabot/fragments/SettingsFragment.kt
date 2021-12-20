@@ -25,6 +25,7 @@ class SettingsFragment : Fragment() {
         }
 
         // Change la langue de l'appli
+
         val appLanguage = view.findViewById<TextView>(R.id.app_language)
         appLanguage.setOnClickListener {
             // TODO: Changer la langue de l'appli

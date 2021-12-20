@@ -2,6 +2,7 @@ package fr.esiea.esieabot
 
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +16,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val REQUEST_ENABLE_BT = 1
+    private val REQUEST_ENABLE_BT = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,18 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        // Permet de changer la langue de l'appli
+        val languageToLoad = "fr" // change your language here
+
+        val locale = Locale(languageToLoad)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(
+            config,
+            baseContext.resources.displayMetrics
+        )
 
         // Vérifie si l'appareil supporte le Bluetooth
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
