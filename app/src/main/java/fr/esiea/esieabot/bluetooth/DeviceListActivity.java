@@ -12,12 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Set;
 
 import fr.esiea.esieabot.MainActivity;
 import fr.esiea.esieabot.R;
+import fr.esiea.esieabot.fragments.ControlFragment;
 
 public class DeviceListActivity extends AppCompatActivity {
 
@@ -33,22 +35,8 @@ public class DeviceListActivity extends AppCompatActivity {
         setContentView(R.layout.device_list);
 
         mDeviceList = (ListView)findViewById(R.id.listView);
-
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(mBluetoothAdapter == null) {
-            Toast.makeText(getApplicationContext(), "Bluetooth Device Not Available", Toast.LENGTH_LONG).show();
-            finish();
-        }
-        else {
-            if (mBluetoothAdapter.isEnabled()) {
-                listPairedDevices();
-            }
-            else {
-                //Ask to the user turn the bluetooth on
-                Intent turnBTon = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(turnBTon,1);
-            }
-        }
+        listPairedDevices();
     }
 
     private void listPairedDevices() {
@@ -81,6 +69,8 @@ public class DeviceListActivity extends AppCompatActivity {
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
             // Make an intent to start next activity.
+
+
             Intent i = new Intent(DeviceListActivity.this, BtClientActivity.class);
             //Change the activity.
             i.putExtra(EXTRA_ADDRESS, address); //this will be received at CommunicationsActivity

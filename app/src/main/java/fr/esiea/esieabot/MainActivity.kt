@@ -5,46 +5,52 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import fr.esiea.esieabot.bluetooth.DeviceListActivity
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.bundleOf
+import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_ENABLE_BT = 1
+    val EXTRA_ADRESS = "device_address"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadFragment(HomeFragment())
+        val mDeviceAddress = intent.getStringExtra(DeviceListActivity.EXTRA_ADDRESS)
+
+        loadFragment(HomeFragment(), mDeviceAddress)
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         navigationView.setOnItemSelectedListener {
             when(it.itemId)
             {
                 R.id.home_page -> {
-                    loadFragment(HomeFragment())
+                    loadFragment(HomeFragment(), mDeviceAddress)
                     return@setOnItemSelectedListener true
                 }
                 R.id.control_page -> {
-                    loadFragment(ControlFragment())
+                    loadFragment(ControlFragment(), mDeviceAddress)
                     return@setOnItemSelectedListener true
                 }
                 R.id.settings_page -> {
-                    loadFragment(SettingsFragment())
+                    loadFragment(SettingsFragment(), mDeviceAddress)
                     return@setOnItemSelectedListener true
                 }
                 else -> false
             }
         }
 
-        /*
         // Vérifie si l'appareil supporte le Bluetooth
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         if (bluetoothAdapter == null) {
@@ -56,13 +62,24 @@ class MainActivity : AppCompatActivity() {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         }
-        */
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    private fun loadFragment(fragment: Fragment, address: String?) {
+        if(address == null)
+        {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        else{
+            // a finir
+            val bundle = bundleOf(EXTRA_ADRESS to address)
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment, address)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
     }
 }

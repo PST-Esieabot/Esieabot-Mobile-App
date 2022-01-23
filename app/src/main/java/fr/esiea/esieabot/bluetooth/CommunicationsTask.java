@@ -30,7 +30,7 @@ public class CommunicationsTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPreExecute()     {
-        mProgressDialog = ProgressDialog.show(mCurrentActivity, "Connecting...", "Please wait!!!");  //show a progress dialog
+        mProgressDialog = ProgressDialog.show(mCurrentActivity, "Connexion...", "Chargement...");  //show a progress dialog
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CommunicationsTask extends AsyncTask<Void, Void, Void> {
         super.onPostExecute(result);
 
         if (!mConnected){
-            message("Connection Failed. Is it a SPP Bluetooth running a server? Try again.");
+            message("La connexion a echouée.");
             mCurrentActivity.finish();
 
         }
@@ -66,10 +66,10 @@ public class CommunicationsTask extends AsyncTask<Void, Void, Void> {
         mProgressDialog.dismiss();
     }
 
-    public void write(byte b) {
+    public void write(byte[] b) {
 
         try {
-            mBluetoothSocket.getOutputStream().write((int)b);
+            mBluetoothSocket.getOutputStream().write(b);
         }
         catch (IOException e) {
         }
@@ -112,7 +112,7 @@ public class CommunicationsTask extends AsyncTask<Void, Void, Void> {
             }
         }
 
-        message("Disconnected");
+        message("Déconnecté");
 
         mCurrentActivity.finish();
     }

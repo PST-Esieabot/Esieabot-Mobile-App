@@ -7,17 +7,6 @@
     tools:context=".MainActivity"
     android:background="@color/middle_blue_purple">
 
-    <Button
-        android:id="@+id/btn_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"
-        style="@style/TextAppearance.MaterialComponents.Button"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        app:layout_constraintBottom_toTopOf="@+id/navigation_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/app_title"
         style="@style/titleTextStyle"
