@@ -3,21 +3,20 @@ package fr.esiea.esieabot.bluetooth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.nio.charset.Charset;
+
 import fr.esiea.esieabot.R;
 
 //TODO Reecire la class en fragment
 public class BtClientActivity extends AppCompatActivity {
 
     private String mMessageFromServer = "";
-
     private TextView mMessageTextView;
-    private SeekBar mSpeedSeekBar;
 
     private String mDeviceAddress;
     protected CommunicationsTask mBluetoothConnection;
@@ -41,28 +40,49 @@ public class BtClientActivity extends AppCompatActivity {
         mMessageTextView = (TextView)findViewById(R.id.serverReplyText);
 
         ImageButton btnUp = (ImageButton) findViewById(R.id.arrow_up);
+        ImageButton btnDown = (ImageButton) findViewById(R.id.arrow_down);
+        ImageButton btnLeft = (ImageButton) findViewById(R.id.arrow_left);
+        ImageButton btnRight = (ImageButton) findViewById(R.id.arrow_right);
+        ImageButton btnStop = (ImageButton) findViewById(R.id.control_btn);
+
+        String up = "up";
+        String down = "down";
+        String left = "left";
+        String right = "right";
+        String stop = "stop";
+
         btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                byte up = 00;
-                mBluetoothConnection.write(up);
+                mBluetoothConnection.write(up.getBytes());
             }
         });
-
-        mSpeedSeekBar = (SeekBar) findViewById(R.id.seekBar);
-
-        mSpeedSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                if (fromUser==true) {
-
-                    for (byte b : String.valueOf(progress).getBytes()) {
-                        mBluetoothConnection.write(b);
-                    }
-                    mBluetoothConnection.write((byte)'.');
-
-                    while (mBluetoothConnection.available() > 0) {
+            public void onClick(View v) {
+                mBluetoothConnection.write(down.getBytes());
+            }
+        });
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothConnection.write(left.getBytes());
+            }
+        });
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothConnection.write(right.getBytes());
+            }
+        });
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothConnection.write(stop.getBytes());
+            }
+        });
+/*
+ while (mBluetoothConnection.available() > 0) {
 
                         char c = (char)mBluetoothConnection.read();
 
@@ -76,20 +96,7 @@ public class BtClientActivity extends AppCompatActivity {
                         else {
                             mMessageFromServer += c;
                         }
-                    }
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
+ */
     }
 
     @Override
@@ -98,4 +105,5 @@ public class BtClientActivity extends AppCompatActivity {
         mBluetoothConnection.disconnect();
     }
 }
+
 
