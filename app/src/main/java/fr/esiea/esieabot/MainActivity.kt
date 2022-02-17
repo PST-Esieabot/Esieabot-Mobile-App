@@ -1,85 +1,108 @@
 package fr.esiea.esieabot
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import fr.esiea.esieabot.bluetooth.DeviceListActivity
+import fr.esiea.esieabot.bluetooth.BluetoothTask
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
-import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.bundleOf
-import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.toast
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val REQUEST_CODE = 2
     private val REQUEST_ENABLE_BT = 1
-    val EXTRA_ADRESS = "device_address"
+    private var bluetoothTask: BluetoothTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val mDeviceAddress = intent.getStringExtra(DeviceListActivity.EXTRA_ADDRESS)
+        loadFragment(HomeFragment(this))
 
-        loadFragment(HomeFragment(), mDeviceAddress)
+        checkPermission()
+        setUpBT()
+
+        bluetoothTask = BluetoothTask(this)
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         navigationView.setOnItemSelectedListener {
             when(it.itemId)
             {
                 R.id.home_page -> {
-                    loadFragment(HomeFragment(), mDeviceAddress)
+                    loadFragment(HomeFragment(this))
                     return@setOnItemSelectedListener true
                 }
                 R.id.control_page -> {
-                    loadFragment(ControlFragment(), mDeviceAddress)
+                    loadFragment(ControlFragment(this))
                     return@setOnItemSelectedListener true
                 }
                 R.id.settings_page -> {
-                    loadFragment(SettingsFragment(), mDeviceAddress)
+                    loadFragment(SettingsFragment())
                     return@setOnItemSelectedListener true
                 }
                 else -> false
             }
         }
+    }
 
-        // Vérifie si l'appareil supporte le Bluetooth
-        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-        if (bluetoothAdapter == null) {
-            toast("L'appareil ne supporte pas le Bluetooth")
+    fun startConnection(name: String, address: String) {
+        bluetoothTask!!.connect(address)
+    }
+
+    fun write(s: String) {
+        if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
+            Toast.makeText(this, "Appareil non connecté", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        // Active le Bluetooth si il n'est pas activé
+        bluetoothTask?.write(s.toByteArray())
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setUpBT(){
+
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        // Verifie que le bluetooth est disponible
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, getString(R.string.toast_bluetooth_not_supported), Toast.LENGTH_SHORT).show()
+        }
+        // Demande a l'utilisateur d'activer le bluetooth si il ne l'est pas
         if (bluetoothAdapter?.isEnabled == false) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
         }
     }
 
-    private fun loadFragment(fragment: Fragment, address: String?) {
-        if(address == null)
-        {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+    @SuppressLint("InlinedApi")
+    private fun checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH), REQUEST_CODE)
         }
-        else{
-            // a finir
-            val bundle = bundleOf(EXTRA_ADRESS to address)
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment, address)
-            transaction.addToBackStack(null)
-            transaction.commit()
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH_CONNECT), REQUEST_CODE)
         }
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH_SCAN), REQUEST_CODE)
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH_ADMIN), REQUEST_CODE)
+        }
     }
+
 }
