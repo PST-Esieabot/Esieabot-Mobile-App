@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,6 +17,7 @@ import fr.esiea.esieabot.bluetooth.BluetoothTask
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         checkPermission()
         setUpBT()
 
-        bluetoothTask = BluetoothTask(this)
+        bluetoothTask = BluetoothTask(this, handler)
 
         val navigationView = findViewById<BottomNavigationView>(R.id.navigation_view)
         navigationView.setOnItemSelectedListener {
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         bluetoothTask!!.connect(address)
     }
 
+    @SuppressLint("MissingPermission")
     fun write(s: String) {
         if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
             Toast.makeText(this, "Appareil non connecté", Toast.LENGTH_SHORT).show()
@@ -105,4 +109,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val handler: Handler =  @SuppressLint("HandlerLeak")
+    object : Handler(){
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+
+            /*
+            if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
+
+            }
+
+             */
+        }
+
+    }
 }

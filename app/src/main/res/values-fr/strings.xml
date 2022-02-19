@@ -12,8 +12,12 @@
     <string name="home_connected_to">"Connecté à "</string>
     <string name="deviceList_paired_devices">Périphériques appairés</string>
     <string name="deviceList_available_devices">Appareils disponibles</string>
-    <string name="deviceList_searching">Recherche…</string>
     <string name="toast_bluetooth_not_supported">Votre appareil ne supporte pas le bluetooth</string>
     <string name="toast_no_paired_device_found">Aucun périphérique appairés trouvé</string>
     <string name="toast_work_in_progress">En cours de développement</string>
+    <string name="toast_connected">Connecté</string>
+    <string name="toast_deconnected">Déconnecté</string>
+    <string name="toast_error_sending_data">Une erreur s\'est produite lors de l\'envoi des données</string>
+    <string name="toast_connection_lost">Connexion perdue</string>
+    <string name="toast_connection_failed">La connexion a échoué</string>
 </resources>

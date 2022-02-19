@@ -3,6 +3,10 @@ package fr.esiea.esieabot.bluetooth
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +47,14 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
             Toast.makeText(requireContext(), getString(R.string.toast_no_paired_device_found), Toast.LENGTH_SHORT).show()
         }
 
-        defaultList(newDevicesList)
+        // Remplie la liste des appareils disponibles
+        bluetoothAdapter?.startDiscovery()
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        requireActivity().registerReceiver(receiver, filter)
+        if(newDevicesList.size == 0) {
+            defaultList(newDevicesList)
+        }
+
         // Charge les listes
         val list_paired_devices = view.findViewById<RecyclerView>(R.id.rv_paired_devices)
         val list_new_devices = view.findViewById<RecyclerView>(R.id.rv_new_devices)
@@ -63,11 +74,36 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
         requireActivity().supportFragmentManager.popBackStack()
     }
 
+    private val receiver = object : BroadcastReceiver() {
+
+        @SuppressLint("MissingPermission")
+        override fun onReceive(context: Context, intent: Intent) {
+            when(intent.action) {
+                BluetoothDevice.ACTION_FOUND -> {
+                    // Discovery has found a device. Get the BluetoothDevice
+                    // object and its info from the Intent.
+                    val device: BluetoothDevice? =
+                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                    val deviceName = device?.name
+                    val deviceHardwareAddress = device?.address // MAC address
+                    newDevicesList.add(DevicesModel(deviceName!!, deviceHardwareAddress!!))
+                }
+            }
+        }
+    }
+
     private fun defaultList(list: ArrayList<DevicesModel>) {
         list.add(
             DevicesModel(
                 "Aucun appareil trouvé",
                 ""
             ))
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onDestroy() {
+        super.onDestroy()
+        bluetoothAdapter?.cancelDiscovery()
+        requireActivity().unregisterReceiver(receiver)
     }
 }

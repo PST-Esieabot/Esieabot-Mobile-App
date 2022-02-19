@@ -1,14 +1,23 @@
 package fr.esiea.esieabot.fragments
 
+import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
 import fr.esiea.esieabot.bluetooth.DevicesListFragment
+
 
 class HomeFragment(private val context: MainActivity) : Fragment() {
 
@@ -28,12 +37,21 @@ class HomeFragment(private val context: MainActivity) : Fragment() {
             transaction.commit()
         }
 
-        connectedDevice = view.findViewById(R.id.tv_connected_device_name)
+        requireActivity().registerReceiver(signalReceiver, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
 
+        connectedDevice = view.findViewById(R.id.tv_connected_device_name)
         return view
     }
 
-    fun updateDevice(deviceName: String) {
-        connectedDevice.text = getString(R.string.home_connected_to) + deviceName
+    private val signalReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        @SuppressLint("MissingPermission", "SetTextI18n")
+        override fun onReceive(context: Context?, intent: Intent) {
+            val action = intent.action
+            if (BluetoothDevice.ACTION_ACL_CONNECTED == action) {
+
+                val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                connectedDevice.text = getString(R.string.home_connected_to) + device?.name
+            }
+        }
     }
 }

@@ -3,21 +3,25 @@ package fr.esiea.esieabot.bluetooth
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothSocket
+import android.bluetooth.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.widget.Toast
+import fr.esiea.esieabot.R
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.*
 
-class BluetoothTask(private val activity: Activity){
+class BluetoothTask(private val activity: Activity, private val handler: Handler){
 
-    val STATE_NONE = 0
-    val STATE_LISTEN = 1
-    val STATE_CONNECTING = 2
-    val STATE_CONNECTED = 3
+    val STATE_NONE: Int = 0
+    val STATE_LISTEN: Int = 1
+    val STATE_CONNECTING: Int = 2
+    val STATE_CONNECTED: Int = 3
+
+    val DEVICE_NAME = "device_name"
 
     private val MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
@@ -31,6 +35,9 @@ class BluetoothTask(private val activity: Activity){
 
     @Synchronized
     fun getState(): Int { return connectionState }
+
+    @Synchronized
+    fun getDevice(): BluetoothDevice? { return device}
 
 
     @SuppressLint("MissingPermission")
@@ -99,11 +106,18 @@ class BluetoothTask(private val activity: Activity){
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    @SuppressLint("MissingPermission")
     fun connected(socket: BluetoothSocket) {
 
-        message("Connecté")
+        val tmp = activity.getString(R.string.toast_connected)
+        message(tmp)
 
-        //TODO : Envoyer device.name a HomeFragment() l.186-BluetoothChatService.java
+        // Envoie le nom de l'appareil connecté a la main activity
+        val msg: Message = handler.obtainMessage(0)
+        val bundle = Bundle()
+        bundle.putString(DEVICE_NAME, device?.name)
+        msg.data = bundle
+        handler.sendMessage(msg)
 
         if (connectThread != null) {
             connectThread?.interrupt()
@@ -137,7 +151,8 @@ class BluetoothTask(private val activity: Activity){
                 numBytes = try {
                     mmInStream.read(mmBuffer)
                 } catch (e: IOException) {
-                    message("Déconnecté")
+                    val tmp = activity.getString(R.string.toast_deconnected)
+                    message(tmp)
                     connectionLost()
                     break
                 }
@@ -149,7 +164,8 @@ class BluetoothTask(private val activity: Activity){
             try {
                 mmOutStream.write(bytes)
             } catch (e: IOException) {
-                message("Error occurred when sending data")
+                val tmp = activity.getString(R.string.toast_error_sending_data)
+                message(tmp)
 
                 return
             }
@@ -186,12 +202,14 @@ class BluetoothTask(private val activity: Activity){
     }
 
     private fun connectionLost() {
-        message("Connection lost")
+        val tmp = activity.getString(R.string.toast_connection_lost)
+        message(tmp)
         connectionState = STATE_NONE
     }
 
     private fun connectionFailed() {
-        message("Connection failed")
+        val tmp = activity.getString(R.string.toast_connection_failed)
+        message(tmp)
         connectionState = STATE_NONE
     }
 }

@@ -15,14 +15,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_vertical_margin"/>
+                android:layout_marginEnd="@dimen/activity_horizontal_margin" />
 
             <TextView
                 android:id="@+id/tv_paired_devices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 style="@style/defaultTextStyle"
                 android:text="@string/deviceList_paired_devices"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_paired_devices"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="320dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_paired_devices"
@@ -44,6 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/slate_blue"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_vertical_margin"
                 app:layout_constraintTop_toBottomOf="@id/rv_paired_devices"
                 android:layout_marginTop="20dp" />
 
@@ -51,24 +52,12 @@
                 android:id="@+id/tv_new_devices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
                 style="@style/defaultTextStyle"
                 android:text="@string/deviceList_available_devices"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/v_divider" />
-
-            <TextView
-                android:id="@+id/tv_searching"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                style="@style/defaultTextStyle"
-                android:text="@string/deviceList_searching"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_new_devices"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_new_devices"
@@ -76,7 +65,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_new_devices" />
