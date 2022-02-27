@@ -15,7 +15,7 @@
     // Page de controle
     <string name="control_camera_not_connected">Caméra non connectée</string>
     <string name="control_battery_percentage" translatable="false">%1$d %</string>
-    <string name="control_connection_speed" translatable="false">2ms</string>
+    <string name="control_device_IP" translatable="false">IP</string>
 
     // Page d'option
     <string name="settings_language">Langue : Fr</string>

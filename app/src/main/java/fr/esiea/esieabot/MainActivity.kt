@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -17,13 +18,15 @@ import fr.esiea.esieabot.bluetooth.BluetoothTask
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
-
+import fr.esiea.esieabot.model.FragmentModel
 
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_CODE = 2
     private val REQUEST_ENABLE_BT = 1
     private var bluetoothTask: BluetoothTask? = null
+
+    private val viewModel : FragmentModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,13 +117,23 @@ class MainActivity : AppCompatActivity() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
 
-            /*
-            if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
+            when(msg.what) {
+                Constants.MESSAGE_READ -> if(bluetoothTask?.getState() == bluetoothTask?.STATE_CONNECTED){
+                    val readBuf = msg.obj as ByteArray
+                    val readMessage = String(readBuf, 0, msg.arg1)
 
+                    viewModel.deviceIP = readMessage
+                }
+                Constants.MESSAGE_DEVICE_NAME -> {
+                    val deviceName = msg.data.getString(Constants.DEVICE_NAME)
+                    viewModel.deviceName = deviceName.toString()
+                }
             }
-
-             */
         }
+    }
 
+    private fun message(s: String)
+    {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
     }
 }

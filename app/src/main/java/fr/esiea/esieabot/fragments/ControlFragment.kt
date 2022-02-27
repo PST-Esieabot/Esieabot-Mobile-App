@@ -1,9 +1,6 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothDevice
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
@@ -12,103 +9,96 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
+import fr.esiea.esieabot.model.FragmentModel
 
 
 class ControlFragment(private val context: MainActivity) : Fragment() {
 
-    val FORWARDS = "forwards"
-    val BACKWARDS = "backwards"
-    val LEFT = "left"
-    val RIGHT = "right"
-    val STOP = "stop"
-
-    lateinit var connectionSpd: TextView
+    private val viewModel : FragmentModel by activityViewModels()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_control, container, false)
+        return inflater.inflate(R.layout.fragment_control, container, false)
+    }
 
-        connectionSpd = view.findViewById(R.id.tv_connection_speed)
-        requireActivity().registerReceiver(signalReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val tvDeviceIP = view.findViewById<TextView>(R.id.tv_device_IP)
         val btnForwards = view.findViewById<ImageButton>(R.id.btn_forwards)
+        val btnBackwards = view.findViewById<ImageButton>(R.id.btn_backwards)
+        val btnLeft = view.findViewById<ImageButton>(R.id.btn_left)
+        val btnRight = view.findViewById<ImageButton>(R.id.btn_right)
+        val btnStop = view.findViewById<ImageButton>(R.id.btn_stop)
+        val cameraView: WebView = view.findViewById(R.id.wv_camera)
+
+        updateBatteryLevel(view)
+        cameraView.loadUrl("https://esieabot.esiea.fr")
+
+        // Met a jour l'addresse IP de l'appareil connecté
+        if(viewModel.deviceIP != Constants.DEVICE_IP)
+            loadCamera(viewModel.deviceIP, cameraView, tvDeviceIP)
+
         btnForwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    context.write(FORWARDS)
+                    context.write(Constants.FORWARDS)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    context.write(STOP)
+                    context.write(Constants.STOP)
                 }
             }
             false
         }
 
-        val btnBackwards = view.findViewById<ImageButton>(R.id.btn_backwards)
         btnBackwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    context.write(BACKWARDS)
+                    context.write(Constants.BACKWARDS)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    context.write(STOP)
+                    context.write(Constants.STOP)
                 }
             }
             false
         }
 
-        val btnLeft = view.findViewById<ImageButton>(R.id.btn_left)
         btnLeft.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    context.write(LEFT)
+                    context.write(Constants.LEFT)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    context.write(STOP)
+                    context.write(Constants.STOP)
                 }
             }
             false
         }
 
-        val btnRight = view.findViewById<ImageButton>(R.id.btn_right)
         btnRight.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    context.write(RIGHT)
+                    context.write(Constants.RIGHT)
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    context.write(STOP)
+                    context.write(Constants.STOP)
                 }
             }
             false
         }
 
-        val btnStop = view.findViewById<ImageButton>(R.id.btn_stop)
         btnStop.setOnClickListener {
-            context.write(STOP)
-        }
-
-        updateBatteryLevel(view)
-
-        return view
-    }
-
-    private val signalReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        @SuppressLint("SetTextI18n")
-        override fun onReceive(context: Context?, intent: Intent) {
-            val action = intent.action
-            if (BluetoothDevice.ACTION_FOUND == action) {
-                val rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE).toInt()
-                connectionSpd.text = "$rssi ms"
-                Toast.makeText(requireContext(), "rrsi", Toast.LENGTH_SHORT).show()
-            }
+            context.write(Constants.STOP)
         }
     }
 
@@ -127,5 +117,11 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         val batteryLvl = view.findViewById<TextView>(R.id.tv_battery_percentage)
         batteryLvl.text = batteryPct.toString() + "%"
 
+    }
+
+    private fun loadCamera(IP: String, camera: WebView, ipAddress: TextView) {
+
+        ipAddress.text = viewModel.deviceIP
+        camera.loadUrl(IP)
     }
 }

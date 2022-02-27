@@ -6,8 +6,8 @@
     android:background="@color/dark_purple"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/fl_camera"
+    <WebView
+        android:id="@+id/wv_camera"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="35dp"
@@ -22,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/control_camera_not_connected"
-        app:layout_constraintBottom_toBottomOf="@+id/fl_camera"
-        app:layout_constraintEnd_toEndOf="@+id/fl_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/wv_camera"
+        app:layout_constraintEnd_toEndOf="@+id/wv_camera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fl_camera" />
+        app:layout_constraintTop_toTopOf="@+id/wv_camera" />
 
     <TextView
         android:id="@+id/tv_battery_percentage"
@@ -33,18 +33,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/control_battery_percentage"
-        app:layout_constraintBottom_toTopOf="@+id/fl_camera"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/activity_vertical_margin"/>
 
     <TextView
-        android:id="@+id/tv_connection_speed"
+        android:id="@+id/tv_device_IP"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/control_connection_speed"
-        app:layout_constraintBottom_toTopOf="@+id/fl_camera"
+        android:text="@string/control_device_IP"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="@dimen/activity_vertical_margin"/>
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/middle_blue_purple"
-        app:layout_constraintBottom_toTopOf="@+id/fl_camera"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,10 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/middle_blue_purple"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_camera" />
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera" />
 
     <ImageButton
         android:id="@+id/btn_stop"
@@ -76,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_camera"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription" />
 
     <ImageButton
@@ -86,7 +85,7 @@
         android:src="@drawable/ic_left"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_stop"
-        app:layout_constraintTop_toBottomOf="@+id/fl_camera"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
@@ -106,7 +105,7 @@
         android:src="@drawable/ic_right"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_stop"
-        app:layout_constraintTop_toBottomOf="@+id/fl_camera"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription"/>
 
     <ImageButton

@@ -14,7 +14,7 @@ import fr.esiea.esieabot.BuildConfig
 
 class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        super.onCreate(savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
         //Ouverture de l'url sur clique du texte

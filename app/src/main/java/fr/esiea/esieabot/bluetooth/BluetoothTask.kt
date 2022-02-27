@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.widget.Toast
+import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.R
 import java.io.IOException
 import java.io.InputStream
@@ -21,8 +22,6 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
     val STATE_CONNECTING: Int = 2
     val STATE_CONNECTED: Int = 3
 
-    val DEVICE_NAME = "device_name"
-
     private val MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private var connectThread: ConnectThread? = null
@@ -35,10 +34,6 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
 
     @Synchronized
     fun getState(): Int { return connectionState }
-
-    @Synchronized
-    fun getDevice(): BluetoothDevice? { return device}
-
 
     @SuppressLint("MissingPermission")
     fun connect(address: String) {
@@ -113,11 +108,14 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
         message(tmp)
 
         // Envoie le nom de l'appareil connecté a la main activity
-        val msg: Message = handler.obtainMessage(0)
+
+        // Send the name of the connected device back to the UI Activity
+        val msg: Message = handler.obtainMessage(Constants.MESSAGE_DEVICE_NAME)
         val bundle = Bundle()
-        bundle.putString(DEVICE_NAME, device?.name)
+        bundle.putString(Constants.DEVICE_NAME, device!!.name)
         msg.data = bundle
         handler.sendMessage(msg)
+
 
         if (connectThread != null) {
             connectThread?.interrupt()
@@ -156,6 +154,12 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
                     connectionLost()
                     break
                 }
+
+                // Envoie la valeur lu a la mainActivity
+                val readMsg = handler.obtainMessage(
+                    Constants.MESSAGE_READ, numBytes, -1,
+                    mmBuffer)
+                readMsg.sendToTarget()
             }
         }
 
