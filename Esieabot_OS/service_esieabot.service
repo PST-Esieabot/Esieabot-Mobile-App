@@ -1,0 +1,14 @@
+[Unit]
+Description=ESIEABOT OS
+After=bluetooth.target
+Requires=bluetooth.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/pi/Esieabot_OS
+ExecStart=/home/pi/Esieabot_OS/main.py
+
+[Install]
+WantedBy=multi-user.target
