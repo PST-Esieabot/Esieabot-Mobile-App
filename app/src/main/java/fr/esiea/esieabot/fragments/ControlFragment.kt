@@ -3,13 +3,17 @@ package fr.esiea.esieabot.fragments
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.os.BatteryManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -40,14 +44,16 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         val btnLeft = view.findViewById<ImageButton>(R.id.btn_left)
         val btnRight = view.findViewById<ImageButton>(R.id.btn_right)
         val btnStop = view.findViewById<ImageButton>(R.id.btn_stop)
-        val cameraView: WebView = view.findViewById(R.id.wv_camera)
+        val cameraView = view.findViewById<WebView>(R.id.wv_camera)
+        val cameraHiddenView = view.findViewById<View>(R.id.v_camera_hidden)
+        val cameraStatus = view.findViewById<TextView>(R.id.tv_camera_status)
 
+        // Met a jour le pourcentage de batterie
         updateBatteryLevel(view)
-        cameraView.loadUrl("https://esieabot.esiea.fr")
 
         // Met a jour l'addresse IP de l'appareil connecté
         if(viewModel.deviceIP != Constants.DEVICE_IP)
-            loadCamera(viewModel.deviceIP, cameraView, tvDeviceIP)
+            loadCamera(viewModel.deviceIP, cameraView, tvDeviceIP, cameraHiddenView, cameraStatus)
 
         btnForwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
@@ -102,6 +108,7 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         }
     }
 
+
     @SuppressLint("SetTextI18n")
     private fun updateBatteryLevel(view: View) {
         val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { ifilter ->
@@ -119,9 +126,39 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
 
     }
 
-    private fun loadCamera(IP: String, camera: WebView, ipAddress: TextView) {
-
-        ipAddress.text = viewModel.deviceIP
+    @SuppressLint("SetTextI18n")
+    private fun loadCamera(IP: String, camera: WebView, ipAddress: TextView, cameraHiddenView: View, cameraStatus: TextView
+    ) {
+        ipAddress.text = viewModel.deviceIP + " IP"
         camera.loadUrl(IP)
+
+        camera.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val url = request?.url.toString()
+                view?.loadUrl(url)
+                return super.shouldOverrideUrlLoading(view, request)
+            }
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                cameraStatus.visibility = View.VISIBLE
+                cameraHiddenView.visibility = View.VISIBLE
+                camera.visibility = View.INVISIBLE
+                super.onPageStarted(view, url, favicon)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                cameraStatus.visibility = View.INVISIBLE
+                cameraHiddenView.visibility = View.INVISIBLE
+                camera.visibility = View.VISIBLE
+                super.onPageFinished(view, url)
+            }
+
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                cameraStatus.visibility = View.VISIBLE
+                cameraHiddenView.visibility = View.VISIBLE
+                camera.visibility = View.INVISIBLE
+                super.onReceivedError(view, request, error)
+            }
+        }
     }
 }
