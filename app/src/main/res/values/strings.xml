@@ -10,11 +10,12 @@
     <string name="home_title" translatable="false">esieabot</string>
     <string name="home_robot_non_connected">Robot non connecté</string>
     <string name="home_click_to_connect">Cliquez pour connecter votre robot</string>
+    <string name="home_connected_to">Connecté à </string>
 
     // Page de controle
     <string name="control_camera_not_connected">Caméra non connectée</string>
-    <string name="control_battery_percentage" translatable="false">100%</string>
-    <string name="control_connection_speed" translatable="false">2ms</string>
+    <string name="control_battery_percentage" translatable="false">%1$d %</string>
+    <string name="control_device_IP" translatable="false">IP</string>
 
     // Page d'option
     <string name="settings_language">Langue : Fr</string>
@@ -22,5 +23,19 @@
     <string name="settings_rights">Tout droit réservé ESIEA</string>
     <string name="settings_version" translatable="false">Version</string>
     <string name="settings_versionName" translatable="false"> </string>
+
+    // Liste d'appareil connecté
+    <string name="deviceList_paired_devices">Périphériques appairés</string>
+    <string name="deviceList_available_devices">Appareils disponibles</string>
+
+    // Toast
+    <string name="toast_bluetooth_not_supported">Votre appareil ne supporte pas le bluetooth</string>
+    <string name="toast_no_paired_device_found">Aucun périphérique appairés trouvé</string>
+    <string name="toast_work_in_progress">En cours de développement</string>
+    <string name="toast_connected">Connecté</string>
+    <string name="toast_deconnected">Déconnecté</string>
+    <string name="toast_error_sending_data">Une erreur s\'est produite lors de l\'envoi des données</string>
+    <string name="toast_connection_lost">Connexion perdue</string>
+    <string name="toast_connection_failed">La connexion a échoué</string>
 
 </resources>

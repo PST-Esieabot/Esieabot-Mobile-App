@@ -8,7 +8,7 @@
     android:background="@color/middle_blue_purple">
 
     <TextView
-        android:id="@+id/app_title"
+        android:id="@+id/main_title"
         style="@style/titleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

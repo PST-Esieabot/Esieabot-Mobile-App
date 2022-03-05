@@ -3,109 +3,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_purple"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/serverReplyText"
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/camera"
+    <WebView
+        android:id="@+id/wv_camera"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_camera_hidden"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="35dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/app_text"
+        android:id="@+id/tv_camera_status"
+        android:visibility="visible"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/control_camera_not_connected"
-        app:layout_constraintBottom_toBottomOf="@+id/camera"
-        app:layout_constraintEnd_toEndOf="@+id/camera"
+        app:layout_constraintBottom_toBottomOf="@+id/wv_camera"
+        app:layout_constraintEnd_toEndOf="@+id/wv_camera"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/camera" />
+        app:layout_constraintTop_toTopOf="@+id/wv_camera" />
 
     <TextView
-        android:id="@+id/battery_percentage"
+        android:id="@+id/tv_battery_percentage"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/control_battery_percentage"
-        app:layout_constraintBottom_toTopOf="@+id/camera"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/activity_vertical_margin"/>
 
     <TextView
-        android:id="@+id/connection_speed"
+        android:id="@+id/tv_device_IP"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/control_connection_speed"
-        app:layout_constraintBottom_toTopOf="@+id/camera"
+        android:text="@string/control_device_IP"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="@dimen/activity_vertical_margin"/>
 
+    <View
+        android:id="@+id/v_view1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/middle_blue_purple"
+        app:layout_constraintBottom_toTopOf="@+id/wv_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/v_view2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/middle_blue_purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera" />
+
     <ImageButton
-        android:id="@+id/control_btn"
+        android:id="@+id/btn_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_control"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription" />
 
     <ImageButton
-        android:id="@+id/arrow_left"
+        android:id="@+id/btn_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_left"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/control_btn"
-        app:layout_constraintTop_toBottomOf="@+id/camera"
+        app:layout_constraintEnd_toStartOf="@+id/btn_stop"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
-        android:id="@+id/arrow_up"
+        android:id="@+id/btn_forwards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_up"
-        app:layout_constraintBottom_toTopOf="@+id/control_btn"
+        app:layout_constraintBottom_toTopOf="@+id/btn_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
-        android:id="@+id/arrow_right"
+        android:id="@+id/btn_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_right"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/control_btn"
-        app:layout_constraintTop_toBottomOf="@+id/camera"
+        app:layout_constraintStart_toEndOf="@+id/btn_stop"
+        app:layout_constraintTop_toBottomOf="@+id/wv_camera"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
-        android:id="@+id/arrow_down"
+        android:id="@+id/btn_backwards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_down"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/control_btn"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop"
         tools:ignore="ContentDescription"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

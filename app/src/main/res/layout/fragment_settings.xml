@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_purple"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/app_language"
+        android:id="@+id/tv_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_language"
@@ -18,29 +19,29 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
     <TextView
-        android:id="@+id/app_bug"
+        android:id="@+id/tv_report_bug"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_bug"
-        app:layout_constraintBottom_toTopOf="@+id/app_rights"
+        app:layout_constraintBottom_toTopOf="@+id/tv_right"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
     <TextView
-        android:id="@+id/app_rights"
+        android:id="@+id/tv_right"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings_rights"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        app:layout_constraintBottom_toTopOf="@+id/app_version"
+        app:layout_constraintBottom_toTopOf="@+id/tv_app_version"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/app_version"
+        android:id="@+id/tv_app_version"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/app_versionName"
+        android:id="@+id/tv_app_version_name"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +60,6 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/app_version" />
+        app:layout_constraintStart_toEndOf="@+id/tv_app_version" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
