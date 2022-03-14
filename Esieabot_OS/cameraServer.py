@@ -9,18 +9,6 @@ import socketserver
 from threading import Condition
 from http import server
 
-
-PAGE="""\
-<html>
-<head>
-    <title>Esieabot Streaming server</title>
-</head>
-<body>
-    <img src="stream.mjpg" width="640" height="480" />
-</body>
-</html>
-"""
-
 class cameraServer(object):
     def __init__(self, camera, *args, **kwargs):
         """ Constructeur : initialise le serveur camera """
@@ -44,6 +32,7 @@ class cameraServer(object):
             server = StreamingServer(address, StreamingHandler, output)
             server.serve_forever()
         finally:
+            server.server_close()
             self.camera.stop_recording()
 
 
@@ -78,17 +67,18 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
     output = None
 
     def do_GET(self):
-        if self.path == '/':
-            self.send_response(301)
-            self.send_header('Location', '/index.html')
+        if self.path == '/' or self.path == '/index.html':
+            self.path = '/templates/index.html'
+            try:
+                file = open(self.path[1:]).read()
+                self.send_response(200)
+            except:
+                file = "Fichier non trouve"
+                self.send_response(404)
+
             self.end_headers()
-        elif self.path == '/index.html':
-            content = PAGE.encode('utf-8')
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html')
-            self.send_header('Content-Length', len(content))
-            self.end_headers()
-            self.wfile.write(content)
+            self.wfile.write(bytes(file, 'utf-8'))
+
         elif self.path == '/stream.mjpg':
             self.send_response(200)
             self.send_header('Age', 0)
