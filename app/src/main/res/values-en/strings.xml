@@ -27,4 +27,8 @@
     <string name="toast_error_sending_data">Error occurred when sending data</string>
     <string name="toast_connection_lost">Connection lost</string>
     <string name="toast_connection_failed">Connection failed</string>
+    <string name="toast_device_not_connected">Device not connected</string>
+    <string name="deviceList_no_device_found">No device found</string>
+    <string name="progressDialog_connecting_to">Connecting to %1$s</string>
+    <string name="progressDialog_loading">Loading</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.esiea.esieabot"
     android:versionCode="1"
-    android:versionName="1.2">
+    android:versionName="1.3">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />

@@ -3,6 +3,7 @@ package fr.esiea.esieabot
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -13,12 +14,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esiea.esieabot.bluetooth.BluetoothTask
 import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
 import fr.esiea.esieabot.model.FragmentModel
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initLang()
         setContentView(R.layout.activity_main)
 
         loadFragment(HomeFragment(this))
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.settings_page -> {
-                    loadFragment(SettingsFragment())
+                    loadFragment(SettingsFragment(this))
                     return@setOnItemSelectedListener true
                 }
                 else -> false
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     fun write(s: String) {
         if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
-            Toast.makeText(this, "Appareil non connecté", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_device_not_connected), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -130,6 +134,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    private fun initLang() {
+        val sharedPref = this.getSharedPreferences(Constants.LANG, Context.MODE_PRIVATE)
+        val langPref = sharedPref.getString(Constants.LANG, "fr")
+
+        val locale = Locale(langPref!!)
+        Locale.setDefault(locale)
+
+        setAppLocale(this, langPref)
+    }
+
+    fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+
+        config.locale = locale
+        config.setLayoutDirection(locale)
+
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     private fun message(s: String)

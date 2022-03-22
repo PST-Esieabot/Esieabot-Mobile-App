@@ -29,7 +29,6 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
     private var connectionState = STATE_NONE
     private var device: BluetoothDevice? = null
 
-    //TODO : remplacer ProgressDialog par ProgressBar -> 'ProgressDialog' is deprecated'
     private var progressDialog: ProgressDialog? = null
 
     @Synchronized
@@ -39,7 +38,7 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
     fun connect(address: String) {
         device = bluetoothAdapter?.getRemoteDevice(address)
 
-        progressDialog = ProgressDialog.show(activity, "Connexion à ${device?.name}", "Chargement")
+        progressDialog = ProgressDialog.show(activity, String.format(activity.getString(R.string.progressDialog_connecting_to), device?.name), activity.getString(R.string.progressDialog_loading))
 
         // arrête les threads s'il sont en cours
         if (connectThread != null) {

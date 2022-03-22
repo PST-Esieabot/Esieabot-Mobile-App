@@ -1,18 +1,21 @@
 package fr.esiea.esieabot.fragments
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import fr.esiea.esieabot.R
 import android.widget.TextView
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import fr.esiea.esieabot.BuildConfig
+import fr.esiea.esieabot.Constants
+import fr.esiea.esieabot.MainActivity
+import fr.esiea.esieabot.R
+import java.util.*
 
-class SettingsFragment : Fragment() {
+class SettingsFragment(private val context: MainActivity) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
@@ -25,17 +28,33 @@ class SettingsFragment : Fragment() {
         }
 
         // Change la langue de l'appli
+        val sharedPref = activity?.getSharedPreferences(Constants.LANG, Context.MODE_PRIVATE)
+        val editor = sharedPref?.edit()
+
+        val langPref = sharedPref?.getString(Constants.LANG, "fr")
+        val locale = Locale(langPref!!)
+        Locale.setDefault(locale)
+
         val appLanguage = view.findViewById<TextView>(R.id.tv_language)
         appLanguage.setOnClickListener {
-            // TODO: Changer la langue de l'appli
-            Toast.makeText(context, getString(R.string.toast_work_in_progress), Toast.LENGTH_SHORT).show()
+
+            if(Locale.getDefault().language == "en") {
+                editor?.putString(Constants.LANG, "fr")?.apply()
+                context.setAppLocale(requireContext(), "fr")
+            }
+            else {
+                editor?.putString(Constants.LANG, "en")?.apply()
+                context.setAppLocale(requireContext(), "en")
+            }
+
+            requireActivity().finish()
+            requireActivity().startActivity(Intent(context,  MainActivity::class.java))
+            requireActivity().finishAffinity()
         }
 
-        // Recupère le numéro de version de l'application
         // Aller dans "AndroidManifest.xml" pour changer le numéro de version
-        val myVersionName = BuildConfig.VERSION_NAME
         val versionName = view.findViewById<TextView>(R.id.tv_app_version_name)
-        versionName.text = myVersionName
+        versionName.text = BuildConfig.VERSION_NAME
 
         return view
     }

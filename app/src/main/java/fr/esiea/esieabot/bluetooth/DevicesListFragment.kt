@@ -25,6 +25,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
     private val pairedDevicesList = arrayListOf<DevicesModel>()
     private val newDevicesList = arrayListOf<DevicesModel>()
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+    private lateinit var list_new_devices : RecyclerView
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,19 +46,19 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
         }
         if(pairedDevicesList.size == 0) {
             Toast.makeText(requireContext(), getString(R.string.toast_no_paired_device_found), Toast.LENGTH_SHORT).show()
+            defaultList(pairedDevicesList)
         }
 
         // Remplie la liste des appareils disponibles
         bluetoothAdapter?.startDiscovery()
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        requireActivity().registerReceiver(receiver, filter)
+        requireActivity().registerReceiver(receiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
         if(newDevicesList.size == 0) {
             defaultList(newDevicesList)
         }
 
         // Charge les listes
         val list_paired_devices = view.findViewById<RecyclerView>(R.id.rv_paired_devices)
-        val list_new_devices = view.findViewById<RecyclerView>(R.id.rv_new_devices)
+        list_new_devices = view.findViewById<RecyclerView>(R.id.rv_new_devices)
 
         list_paired_devices.adapter = DevicesAdapter(context, pairedDevicesList, this)
         list_new_devices.adapter = DevicesAdapter(context, newDevicesList, this)
@@ -75,8 +76,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
     }
 
     private val receiver = object : BroadcastReceiver() {
-
-        @SuppressLint("MissingPermission")
+        @SuppressLint("MissingPermission", "NotifyDataSetChanged")
         override fun onReceive(context: Context, intent: Intent) {
             when(intent.action) {
                 BluetoothDevice.ACTION_FOUND -> {
@@ -86,7 +86,10 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
                         intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
                     val deviceName = device?.name
                     val deviceHardwareAddress = device?.address // MAC address
+
+                    // Met a jour la liste avec les nouveaux appareils connectés
                     newDevicesList.add(DevicesModel(deviceName!!, deviceHardwareAddress!!))
+                    list_new_devices.adapter?.notifyDataSetChanged()
                 }
             }
         }
@@ -95,7 +98,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
     private fun defaultList(list: ArrayList<DevicesModel>) {
         list.add(
             DevicesModel(
-                "Aucun appareil trouvé",
+                context.getString(R.string.deviceList_no_device_found),
                 ""
             ))
     }

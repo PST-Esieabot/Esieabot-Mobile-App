@@ -20,4 +20,8 @@
     <string name="toast_error_sending_data">Une erreur s\'est produite lors de l\'envoi des données</string>
     <string name="toast_connection_lost">Connexion perdue</string>
     <string name="toast_connection_failed">La connexion a échoué</string>
+    <string name="toast_device_not_connected">Appareil non connecté</string>
+    <string name="deviceList_no_device_found">Aucun appareil trouvé</string>
+    <string name="progressDialog_connecting_to">Connexion à %1$s</string>
+    <string name="progressDialog_loading">Chargement</string>
 </resources>
