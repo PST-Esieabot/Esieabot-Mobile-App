@@ -14,7 +14,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fr.esiea.esieabot.bluetooth.BluetoothTask
 import fr.esiea.esieabot.fragments.ControlFragment
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initLang()
         setContentView(R.layout.activity_main)
 
         loadFragment(HomeFragment(this))
@@ -136,17 +134,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("CommitPrefEdits")
-    private fun initLang() {
-        val sharedPref = this.getSharedPreferences(Constants.LANG, Context.MODE_PRIVATE)
-        val langPref = sharedPref.getString(Constants.LANG, "fr")
-
-        val locale = Locale(langPref!!)
-        Locale.setDefault(locale)
-
-        setAppLocale(this, langPref)
-    }
-
     fun setAppLocale(context: Context, language: String) {
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -156,6 +143,10 @@ class MainActivity : AppCompatActivity() {
         config.setLayoutDirection(locale)
 
         resources.updateConfiguration(config, resources.displayMetrics)
+
+        val intent = intent
+        finish()
+        startActivity(intent)
     }
 
     private fun message(s: String)
