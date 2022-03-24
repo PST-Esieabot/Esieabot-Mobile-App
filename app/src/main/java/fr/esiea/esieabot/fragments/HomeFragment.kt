@@ -1,7 +1,6 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -12,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import fr.esiea.esieabot.Constants
@@ -74,6 +72,9 @@ class HomeFragment(private val context: MainActivity) : Fragment() {
                 viewModel.deviceName = device?.name.toString()
                 // Affiche le nom de l'appareil
                 connectedDevice.text = getString(R.string.home_connected_to) + device?.name
+            }
+            if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
+                connectedDevice.text = getString(R.string.home_robot_non_connected)
             }
         }
     }
