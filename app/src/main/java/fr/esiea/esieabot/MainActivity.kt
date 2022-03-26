@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -59,6 +60,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+
+        val sharedPref = this.getSharedPreferences(Constants.FIRSTTIME, Context.MODE_PRIVATE)
+        val isFirstTime = sharedPref.getBoolean(Constants.FIRSTTIME, true)
+
+        if(isFirstTime) {
+            HelpPopup(this).show()
+        }
+
+        val btnHelp = findViewById<ImageView>(R.id.btn_help)
+        btnHelp.setOnClickListener {
+            HelpPopup(this).show()
         }
     }
 

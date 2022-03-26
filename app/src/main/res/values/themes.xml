@@ -42,6 +42,14 @@
         <item name="android:textColor">@color/dark_purple</item>
     </style>
 
+    <style name="middle_titleTextStyle" parent="titleTextStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="small_titleTextStyle" parent="titleTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="bottomNavStyle" parent="Widget.Design.BottomNavigationView">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/poppins_regular</item>

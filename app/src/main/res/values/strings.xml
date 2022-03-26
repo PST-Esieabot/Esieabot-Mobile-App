@@ -32,6 +32,17 @@
     <string name="progressDialog_connecting_to">Connexion à %1$s</string>
     <string name="progressDialog_loading">Chargement</string>
 
+    // Page d'aide
+    <string name="popup_need_help">Besoin d\'aide ? </string>
+    <string name="popup_understood">J\'ai compris !</string>
+    <string name="popup_first_connection">Première utilisation ?\nLaisse toi guider !</string>
+    <string name="popup_connexion_title">Connectez votre robot</string>
+    <string name="popup_control_title">Amusez vous!</string>
+    <string name="popup_settings_title">Options</string>
+    <string name="popup_connexion_text">"Premièrement, cliquez sur le texte \"Cliquez pour connecter votre robot\", la liste de tous vos appareils Bluetooth appairés s'ouvre, cliquez ensuite sur \"Esieabot\". Si vous n'avez jamais connecté votre robot à l'appli, jetez un coup en bas, il apparaitra surement dans la liste des appareils disponibles. "</string>
+    <string name="popup_control_text">"Cliquez maintenant sur la page de contrôle (dans la barre de navigation tout en bas), il ne vous reste plus qu'à jouer ! Appuyez sur l'une des 4 flèches pour diriger le robot et regardez l'aperçu vidéo dans l'encart prévu à cet effet. "</string>
+    <string name="popup_settings_text">You speak english ? Go to the \"option\" menu to change the app language by clicking on the \"Langue : Fr\" text. \nUn bug ? Une question ? Posez la en cliquant sur \"Signaler un bug\" dans la page d\'option.</string>
+
     // Toast
     <string name="toast_bluetooth_not_supported">Votre appareil ne supporte pas le bluetooth</string>
     <string name="toast_no_paired_device_found">Aucun périphérique appairés trouvé</string>
@@ -42,5 +53,4 @@
     <string name="toast_connection_lost">Connexion perdue</string>
     <string name="toast_connection_failed">La connexion a échoué</string>
     <string name="toast_device_not_connected">Appareil non connecté</string>
-
 </resources>

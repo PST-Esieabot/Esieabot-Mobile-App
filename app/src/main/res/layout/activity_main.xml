@@ -13,9 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_title"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_help"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_help"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <FrameLayout
         android:id="@+id/fragment_container"

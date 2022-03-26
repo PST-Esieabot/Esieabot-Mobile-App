@@ -17,5 +17,7 @@ interface Constants {
         const val DEVICE_NAME = "device_name"
         const val DEVICE_IP = "000.000.0.00"
         const val TOAST = "toast"
+
+        const val FIRSTTIME = "firstTime"
     }
 }
