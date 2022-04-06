@@ -1,6 +1,8 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -22,11 +24,14 @@ import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
 import fr.esiea.esieabot.model.FragmentModel
+import fr.esiea.esieabot.model.ReturnHomeModel
+import kotlin.collections.ArrayList
 
 
 class ControlFragment(private val context: MainActivity) : Fragment() {
 
     private val viewModel : FragmentModel by activityViewModels()
+    private val returnHomeList = arrayListOf<ReturnHomeModel>()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,6 +53,8 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         val cameraHiddenView = view.findViewById<View>(R.id.v_camera_hidden)
         val cameraStatus = view.findViewById<TextView>(R.id.tv_camera_status)
 
+        val btnReturnHome = view.findViewById<ImageButton>(R.id.btn_return_home)
+
         // Met a jour le pourcentage de batterie
         updateBatteryLevel(view)
 
@@ -55,13 +62,24 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         if(viewModel.deviceIP != Constants.DEVICE_IP)
             loadCamera(viewModel.deviceIP, cameraView, tvDeviceIP, cameraHiddenView, cameraStatus)
 
+        var start = 0L
+        var keyPressedDuration = 0L
+
+        btnReturnHome.setOnClickListener {
+            returnHome(returnHomeList)
+        }
+
         btnForwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.FORWARDS)
+                    start = System.currentTimeMillis();
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
+
+                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    returnHomeList.add(ReturnHomeModel(Constants.FORWARDS, keyPressedDuration))
                 }
             }
             false
@@ -71,9 +89,13 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.BACKWARDS)
+                    start = System.currentTimeMillis();
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
+
+                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    returnHomeList.add(ReturnHomeModel(Constants.BACKWARDS, keyPressedDuration))
                 }
             }
             false
@@ -83,9 +105,13 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.LEFT)
+                    start = System.currentTimeMillis();
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
+
+                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    returnHomeList.add(ReturnHomeModel(Constants.LEFT, keyPressedDuration))
                 }
             }
             false
@@ -95,9 +121,13 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.RIGHT)
+                    start = System.currentTimeMillis();
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
+
+                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    returnHomeList.add(ReturnHomeModel(Constants.RIGHT, keyPressedDuration))
                 }
             }
             false
@@ -108,6 +138,34 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun returnHome(buffer: ArrayList<ReturnHomeModel>) {
+
+        //TODO: Ajouter une progressBar avec valeur qui augmente a chaque action
+
+        for (item in buffer.reversed()) {
+            when(item.action) {
+                Constants.FORWARDS -> {
+                    context.write(Constants.BACKWARDS)
+                }
+                Constants.BACKWARDS -> {
+                    context.write(Constants.FORWARDS)
+                }
+                Constants.LEFT -> {
+                    context.write(Constants.RIGHT)
+                }
+                Constants.RIGHT -> {
+                    context.write(Constants.LEFT)
+                }
+            }
+            Thread.sleep(item.duration)
+            context.write(Constants.STOP)
+            Thread.sleep(1000)
+        }
+
+        context.write(Constants.STOP)
+        returnHomeList.clear()
+    }
 
     @SuppressLint("SetTextI18n")
     private fun updateBatteryLevel(view: View) {
@@ -160,5 +218,10 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
                 super.onReceivedError(view, request, error)
             }
         }
+    }
+
+    private fun customProgressDialog() {
+        val customDialog = Dialog(requireContext())
+
     }
 }

@@ -29,6 +29,7 @@
     <string name="deviceList_available_devices">Appareils disponibles</string>
     <string name="deviceList_no_device_found">Aucun appareil trouvé</string>
 
+    // Ecran de chargement
     <string name="progressDialog_connecting_to">Connexion à %1$s</string>
     <string name="progressDialog_loading">Chargement</string>
 

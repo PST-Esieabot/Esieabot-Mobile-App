@@ -19,5 +19,8 @@ interface Constants {
         const val TOAST = "toast"
 
         const val FIRSTTIME = "firstTime"
+
+        const val ACTION = "action"
+        const val DURATION = 0L
     }
 }

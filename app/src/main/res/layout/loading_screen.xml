@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cw_loading_screen"
+        android:translationZ="-90dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        app:cardBackgroundColor="@color/linen"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="1dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/cw_loading_screen"
+        app:layout_constraintStart_toEndOf="@+id/pb_loading_bar"
+        app:layout_constraintTop_toTopOf="@+id/cw_loading_screen" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cw_loading_screen"
+        app:layout_constraintEnd_toEndOf="@+id/cw_loading_screen"
+        app:layout_constraintStart_toStartOf="@+id/cw_loading_screen"
+        app:layout_constraintTop_toTopOf="@+id/cw_loading_screen" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/black_defaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/progressDialog_connecting_to"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toEndOf="@+id/view2" />
+
+    <TextView
+        style="@style/black_subtitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/progressDialog_loading"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_bar"
+        android:indeterminateTint="@color/dark_purple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/cw_loading_screen"
+        app:layout_constraintStart_toStartOf="@+id/cw_loading_screen"
+        app:layout_constraintTop_toTopOf="@+id/cw_loading_screen"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
