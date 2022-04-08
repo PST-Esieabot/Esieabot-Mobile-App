@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
 import fr.esiea.esieabot.adapter.DevicesAdapter
@@ -69,6 +70,12 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
     override fun onItemClick(position: Int) {
 
         val clickedItem = pairedDevicesList[position]
+        val defaultItem = context.getString(R.string.deviceList_no_device_found)
+
+        if(clickedItem.deviceName == defaultItem) {
+            requireActivity().supportFragmentManager.popBackStack()
+            return
+        }
 
         context.startConnection(clickedItem.deviceName, clickedItem.deviceAddress)
 

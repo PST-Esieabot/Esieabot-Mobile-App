@@ -2,11 +2,13 @@ package fr.esiea.esieabot.bluetooth
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.bluetooth.*
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.widget.ProgressBar
 import android.widget.Toast
 import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.R
