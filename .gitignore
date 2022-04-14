@@ -1,3 +1,11 @@
+# Ajouter a la main
+.idea
+build.gradle
+gradle.properties
+gradlew
+gradlew.bat
+settings.gradle
+
 # Built application files
 *.apk
 *.aar
