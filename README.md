@@ -1,3 +1,5 @@
+![Esieabot](https://github.com/PST-Esieabot/Esieabot-Mobile-App/blob/main/Img/esieabot_application_mobile.png)
+
 # Esieabot-Mobile-App
 L'application mobile Esieabot permet de contrôler le robot [ESIEABOT](https://esieabot.esiea.fr/) à distance via Bluetooth.
 <br/>*Restez à l'écoute de l'avancement du projet car de nouvelles fonctionnalités arrivent régulièrement !*
