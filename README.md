@@ -2,8 +2,15 @@
 
 # Esieabot-Mobile-App
 L'application mobile Esieabot permet de contrôler le robot [ESIEABOT](https://esieabot.esiea.fr/) à distance via Bluetooth.
+Elle permet entre autre :
+- Le controle du robot via 4 flèches directionnelles
+- La visualisation de la caméra en direct
+- Une fonction retour à la maison
+- Un guide d'utilisation
+
 <br/>*Restez à l'écoute de l'avancement du projet car de nouvelles fonctionnalités arrivent régulièrement !*
 
+### The app is also avaible in English
 
 # Installation
 ## Robot
