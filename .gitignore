@@ -1,5 +1,8 @@
 # Ajouter a la main
-.idea
+/.idea
+*.gradle
+*.properties
+*.bat
 build.gradle
 gradle.properties
 gradlew
