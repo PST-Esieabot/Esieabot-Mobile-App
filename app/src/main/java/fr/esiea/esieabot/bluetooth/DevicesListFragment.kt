@@ -3,6 +3,7 @@ package fr.esiea.esieabot.bluetooth
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -25,12 +26,14 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
 
     private val pairedDevicesList = arrayListOf<DevicesModel>()
     private val newDevicesList = arrayListOf<DevicesModel>()
-    private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+    private lateinit var bluetoothAdapter: BluetoothAdapter
     private lateinit var list_new_devices : RecyclerView
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.devices_list, container, false)
+
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
 
         // Ferme le fragment sur clique de la croix
         val close = view.findViewById<ImageView>(R.id.btn_close)
@@ -39,7 +42,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
         }
 
         // Remplie la liste avec les périphériques appairés
-        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter?.bondedDevices
+        val pairedDevices: Set<BluetoothDevice>? = bluetoothAdapter.bondedDevices
         pairedDevices?.forEach { device ->
             val deviceName = device.name
             val deviceHardwareAddress = device.address // MAC address
@@ -51,7 +54,8 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
         }
 
         // Remplie la liste des appareils disponibles
-        bluetoothAdapter?.startDiscovery()
+        // TODO: FAIRE MARCHER CE TRUC, besoin de permissions pour marcher
+        bluetoothAdapter.startDiscovery()
         requireActivity().registerReceiver(receiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
         if(newDevicesList.size == 0) {
             defaultList(newDevicesList)
@@ -89,8 +93,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
                 BluetoothDevice.ACTION_FOUND -> {
                     // Discovery has found a device. Get the BluetoothDevice
                     // object and its info from the Intent.
-                    val device: BluetoothDevice? =
-                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                    val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
                     val deviceName = device?.name
                     val deviceHardwareAddress = device?.address // MAC address
 
@@ -113,7 +116,7 @@ class DevicesListFragment(private val context: MainActivity): Fragment(), Device
     @SuppressLint("MissingPermission")
     override fun onDestroy() {
         super.onDestroy()
-        bluetoothAdapter?.cancelDiscovery()
+        bluetoothAdapter.cancelDiscovery()
         requireActivity().unregisterReceiver(receiver)
     }
 }

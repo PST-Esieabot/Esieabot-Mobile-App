@@ -25,6 +25,7 @@ import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
 import fr.esiea.esieabot.model.FragmentModel
 import fr.esiea.esieabot.model.ReturnHomeModel
+import fr.esiea.esieabot.popup.HelpConnectPopup
 import kotlin.collections.ArrayList
 
 
@@ -61,6 +62,10 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         // Met a jour l'addresse IP de l'appareil connecté
         if(viewModel.deviceIP != Constants.DEVICE_IP)
             loadCamera(viewModel.deviceIP, cameraView, tvDeviceIP, cameraHiddenView, cameraStatus)
+
+        cameraStatus.setOnClickListener {
+            HelpConnectPopup(context).show()
+        }
 
         var start = 0L
         var keyPressedDuration = 0L

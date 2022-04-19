@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import fr.esiea.esieabot.BuildConfig
+import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.MainActivity
 import fr.esiea.esieabot.R
 import java.util.*
@@ -36,6 +37,8 @@ class SettingsFragment(private val context: MainActivity) : Fragment() {
                 context.setAppLocale(requireContext(), "en")
             }
         }
+
+        //context.write("wssid*password)
 
         // Aller dans "AndroidManifest.xml" pour changer le numéro de version
         val versionName = view.findViewById<TextView>(R.id.tv_app_version_name)

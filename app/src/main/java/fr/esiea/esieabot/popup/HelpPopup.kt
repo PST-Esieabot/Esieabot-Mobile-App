@@ -1,4 +1,4 @@
-package fr.esiea.esieabot
+package fr.esiea.esieabot.popup
 
 import android.app.Dialog
 import android.content.Context
@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import fr.esiea.esieabot.Constants
+import fr.esiea.esieabot.MainActivity
+import fr.esiea.esieabot.R
 
 class HelpPopup(private val context: MainActivity) : Dialog(context) {
 

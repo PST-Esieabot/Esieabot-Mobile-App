@@ -21,6 +21,7 @@ import fr.esiea.esieabot.fragments.ControlFragment
 import fr.esiea.esieabot.fragments.HomeFragment
 import fr.esiea.esieabot.fragments.SettingsFragment
 import fr.esiea.esieabot.model.FragmentModel
+import fr.esiea.esieabot.popup.HelpPopup
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
