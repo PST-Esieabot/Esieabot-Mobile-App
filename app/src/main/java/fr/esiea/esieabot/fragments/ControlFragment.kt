@@ -53,7 +53,6 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         val cameraView = view.findViewById<WebView>(R.id.wv_camera)
         val cameraHiddenView = view.findViewById<View>(R.id.v_camera_hidden)
         val cameraStatus = view.findViewById<TextView>(R.id.tv_camera_status)
-
         val btnReturnHome = view.findViewById<ImageButton>(R.id.btn_return_home)
 
         // Met a jour le pourcentage de batterie

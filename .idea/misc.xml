@@ -11,6 +11,7 @@
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable-anydpi/ic_up.xml" value="0.3675" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/bottom_nav_color.xml" value="0.3828125" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/btn_configure.xml" value="0.2155" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/btn_connect.xml" value="0.2155" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/btn_control.xml" value="0.2155" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/btn_understood.xml" value="0.22" />
@@ -31,8 +32,10 @@
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/item_device.xml" value="0.33" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/layout_device_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/loading_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_configure_wifi.xml" value="0.3625" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_connect.xml" value="0.36666666666666664" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_help.xml" value="0.36666666666666664" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_help_connect.xml" value="0.3625" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_loading.xml" value="0.36666666666666664" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/progress_dialog.xml" value="0.33" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/test.xml" value="0.358695652173913" />
