@@ -20,6 +20,8 @@
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/ic_help.xml" value="0.3155" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/ic_settings.xml" value="0.262" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/pp_background.xml" value="0.2155" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/drawable/pp_backround.xml" value="0.2155" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/font/fonts.xml" value="0.396875" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/bluetooth_layout.xml" value="0.36666666666666664" />
@@ -37,6 +39,7 @@
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_help.xml" value="0.36666666666666664" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_help_connect.xml" value="0.3625" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_loading.xml" value="0.36666666666666664" />
+        <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/popup_return_home.xml" value="0.3625" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/progress_dialog.xml" value="0.33" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/layout/test.xml" value="0.358695652173913" />
         <entry key="..\:/Documents/ESIEA/Esieabot/App/Esieabot-Mobile-App/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />

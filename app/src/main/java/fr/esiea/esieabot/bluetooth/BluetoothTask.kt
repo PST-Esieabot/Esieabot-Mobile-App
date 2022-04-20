@@ -12,6 +12,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import fr.esiea.esieabot.Constants
 import fr.esiea.esieabot.R
+import fr.esiea.esieabot.popup.LoadingPopup
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
@@ -30,8 +31,7 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
     private var connectedThread: ConnectedThread? = null
     private var connectionState = STATE_NONE
     private var device: BluetoothDevice? = null
-
-    private var progressDialog: ProgressDialog? = null
+    private lateinit var loadingPopup: LoadingPopup
 
     @Synchronized
     fun getState(): Int { return connectionState }
@@ -40,7 +40,8 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
     fun connect(address: String) {
         device = bluetoothAdapter?.getRemoteDevice(address)
 
-        progressDialog = ProgressDialog.show(activity, String.format(activity.getString(R.string.progressDialog_connecting_to), device?.name), activity.getString(R.string.progressDialog_loading))
+        loadingPopup = LoadingPopup(activity, device!!.name)
+        loadingPopup.show()
 
         // arrête les threads s'il sont en cours
         if (connectThread != null) {
@@ -89,7 +90,8 @@ class BluetoothTask(private val activity: Activity, private val handler: Handler
                 connectionFailed()
                 cancel()
             }
-            progressDialog!!.dismiss()
+            loadingPopup.dismiss()
+
         }
 
         // Closes the client socket and causes the thread to finish.

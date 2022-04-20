@@ -16,7 +16,7 @@
     <string name="settings_language">Language : En</string>
     <string name="settings_bug">Report a bug</string>
     <string name="settings_rights">All rights reserved ESIEA</string>
-    <string name="home_connected_to">"Connected to "</string>
+    <string name="home_connected_to">"Connected to\r"</string>
     <string name="deviceList_paired_devices">Paired devices</string>
     <string name="deviceList_available_devices">Available devices</string>
     <string name="toast_bluetooth_not_supported">Your device doesn\'t support Bluetooth</string>

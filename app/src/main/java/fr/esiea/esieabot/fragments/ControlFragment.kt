@@ -2,7 +2,6 @@ package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -26,6 +25,7 @@ import fr.esiea.esieabot.R
 import fr.esiea.esieabot.model.FragmentModel
 import fr.esiea.esieabot.model.ReturnHomeModel
 import fr.esiea.esieabot.popup.HelpConnectPopup
+import fr.esiea.esieabot.popup.ReturnHomePopup
 import kotlin.collections.ArrayList
 
 
@@ -145,7 +145,9 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun returnHome(buffer: ArrayList<ReturnHomeModel>) {
 
-        //TODO: Ajouter une progressBar avec valeur qui augmente a chaque action
+        val returnHomePopup = ReturnHomePopup(context)
+        returnHomePopup.setMaxProgress(buffer.size)
+        returnHomePopup.show()
 
         for (item in buffer.reversed()) {
             when(item.action) {
@@ -162,6 +164,8 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
                     context.write(Constants.LEFT)
                 }
             }
+            returnHomePopup.incrementProgress()
+
             Thread.sleep(item.duration)
             context.write(Constants.STOP)
             Thread.sleep(1000)
@@ -169,6 +173,8 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
 
         context.write(Constants.STOP)
         returnHomeList.clear()
+
+        //returnHomePopup.dismiss()
     }
 
     @SuppressLint("SetTextI18n")

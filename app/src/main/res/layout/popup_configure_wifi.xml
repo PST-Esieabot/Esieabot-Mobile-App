@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="500dp"
-    android:layout_width="360dp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
-    android:background="@color/middle_blue_purple">
+    android:background="@drawable/pp_background">
 
     <View
         android:id="@+id/view"
@@ -14,6 +14,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popup_btn_close" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/middle_titleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_configuration_title"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/popup_btn_close"
@@ -26,40 +42,50 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        android:id="@+id/textView3"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrez le nom de votre reseau"
+        android:text="@string/popup_SSID"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_ssid" />
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
 
     <EditText
+        style="@style/black_defaultTextStyle"
         android:id="@+id/et_ssid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="SSID"
+        android:autofillHints=""
+        android:hint="@string/popup_enter_SSID"
         android:inputType="textNoSuggestions"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
 
     <TextView
         android:id="@+id/textView"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrez le mot de passe de votre reseau"
+        android:text="@string/popup_password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_ssid" />
+        app:layout_constraintTop_toBottomOf="@+id/et_ssid"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
 
     <EditText
+        style="@style/black_defaultTextStyle"
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Password"
+        android:hint="@string/popup_enter_password"
         android:inputType="textVisiblePassword"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:autofillHints=""
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
 
     <Button
         android:id="@+id/btn_confirm"
@@ -67,17 +93,20 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_understood"
-        android:text="Confirm"
+        android:text="@string/popup_confirm"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:gravity="center"
+        android:id="@+id/textView2"
         style="@style/defaultTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pensez a redemarrer le robot APRES..."
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:text="@string/popup_reboot"
         app:layout_constraintBottom_toTopOf="@+id/btn_confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

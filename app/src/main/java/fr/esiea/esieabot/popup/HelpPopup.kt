@@ -2,6 +2,8 @@ package fr.esiea.esieabot.popup
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -14,6 +16,7 @@ class HelpPopup(private val context: MainActivity) : Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(R.layout.popup_help)
 
         val sharedPref = context.getSharedPreferences(Constants.FIRSTTIME, Context.MODE_PRIVATE)

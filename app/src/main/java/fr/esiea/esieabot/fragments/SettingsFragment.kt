@@ -47,8 +47,6 @@ class SettingsFragment(private val context: MainActivity) : Fragment() {
             }
         }
 
-        //context.write("wssid*password)
-
         // Aller dans "AndroidManifest.xml" pour changer le numéro de version
         val versionName = view.findViewById<TextView>(R.id.tv_app_version_name)
         versionName.text = BuildConfig.VERSION_NAME
