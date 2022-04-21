@@ -2,8 +2,10 @@
 # https://github.com/karulis/pybluez
 
 from bluetooth import *
+import settings as s
 import os
 import time
+import settings
 
 DEFAULT_SPEED = 100
 
@@ -13,13 +15,15 @@ STATE_CONNECTED = 2
 STATE_CONNECTION_LOST = 3
 
 class bluetoothServer(object):
-    def __init__(self, isCamera, deviceIP, robot, *args, **kwargs):
-        """ Constructeur : initialise le serveur bluetooth """
+    def __init__(self, isCamera, deviceIP = 0, robot = None, *args, **kwargs):
+        """ constructeur : initialise le serveur bluetooth """
         try:
             self.isCamera = isCamera
             self.deviceIP = deviceIP
             self.robot = robot
             self.connectionState = STATE_NONE
+
+            self.settings = s.settings()
 
             print("Initialisation du serveur bluetooth : OK")
         except:
@@ -31,8 +35,6 @@ class bluetoothServer(object):
     def connect(self):
         """ Entame la connexion bluetooth """
         self.connectionState = STATE_CONNECTING
-
-        time.sleep(4) # Permet de laisser le temps au bluetooth de s'activer
         os.system("sudo hciconfig hci0 piscan")  # Rend le robot visible
 
         server_sock = BluetoothSocket( RFCOMM )
@@ -54,13 +56,14 @@ class bluetoothServer(object):
         time.sleep(0.05)
         self.robot.stop()
 
-        print("En attente de connexion sur le port RFCOMM %d" % port)
+        print("\nEn attente de connexion sur le port RFCOMM %d" % port)
 
         client_sock, client_info = server_sock.accept()
-        print("Connexion acceptee de ", client_info, "\n")
+        print("Connexion acceptee de ", client_info)
 
+        # Envoie l'adresse IP du robot a l'appareil connecte
         if(self.isCamera == True):
-            client_sock.send(self.deviceIP)
+            client_sock.send(self.deviceIP.encode())
 
         self.connected(client_sock, server_sock)
 
@@ -92,6 +95,10 @@ class bluetoothServer(object):
                 if data == "stop":
                     self.robot.stop()
                     print("Stop")
+                if data[0] == 'w':
+                    SSID = self.settings.getSSID(data)
+                    password = self.settings.getPassword(data)
+                    self.settings.createWifiConfig(SSID, password)
 
         except IOError:
             self.connectionLost(client_sock, server_sock)
@@ -100,7 +107,9 @@ class bluetoothServer(object):
     def connectionLost(self, client_sock, server_sock):
         """ Permet de se deconnecter du serveur bluetooth en cas d'erreur """
         self.connectionState = STATE_CONNECTION_LOST
+
         print("\nConnexion perdu")
+
         self.robot.stop()
 
         client_sock.close()

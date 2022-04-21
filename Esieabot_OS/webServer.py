@@ -1,26 +1,33 @@
 # Sources :
 # https://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
 
+
 import socket
 import picamera
 import io
-import logging
 import socketserver
 from threading import Condition
 from http import server
 
-class cameraServer(object):
-    def __init__(self, camera, *args, **kwargs):
+
+class webServer(object):
+    def __init__(self, *args, **kwargs):
         """ Constructeur : initialise le serveur camera """
         try:
-            self.deviceIP = self.getIP()
+            camera = picamera.PiCamera(resolution='640x480', framerate=24)
+            self.isWorking = True
             self.camera = camera
-            print("Initialisation du serveur camera : OK")
-        except:
-            print("ERREUR : L'initialisation du serveur camera a echoue")
-        pass
-        return super().__init__(*args, **kwargs)
 
+        except:
+            self.isWorking = False
+            self.deviceIP = 0
+            print("WARNING : Camera non connecte")
+            return
+
+        self.deviceIP = self.getIP()
+        print("Initialisation du serveur camera : OK")
+       
+        return super().__init__(*args, **kwargs)
 
     def startStreaming(self):
         print("\nLancement du stream video a l'adresse http://{}" .format(self.deviceIP))
@@ -38,11 +45,14 @@ class cameraServer(object):
 
     def getIP(self):
         """ Renvoie l adresse IP du robot """
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8.", 80))
-        device_ip = s.getsockname()[0]
-        s.close()
-        device_ip += ":8000"
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8.", 80))
+            device_ip = s.getsockname()[0]
+            s.close()
+            device_ip += ":8000"
+        except:
+            device_ip = 0
 
         return device_ip
 
@@ -68,12 +78,12 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == '/' or self.path == '/index.html':
-            self.path = '/templates/index.html'
+            self.path = '/index.html'
             try:
                 file = open(self.path[1:]).read()
                 self.send_response(200)
             except:
-                file = "Fichier non trouve"
+                file = "ERREUR : Index.html non trouve"
                 self.send_response(404)
 
             self.end_headers()
@@ -98,9 +108,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                     self.wfile.write(frame)
                     self.wfile.write(b'\r\n')
             except Exception as e:
-                logging.warning(
-                    'Removed streaming client %s: %s',
-                    self.client_address, str(e))
+                pass
         else:
             self.send_error(404)
             self.end_headers()
@@ -113,3 +121,6 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     def __init__(self, address, handler, output):
         handler.output = output
         super().__init__(address, handler)
+
+#Nathan
+#wlkl7662

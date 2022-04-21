@@ -4,10 +4,8 @@
 
 from wiringpi import *
 
-
 # Constantes
 DEFAULT_SPEED = 100
-
 LEFT_ENABLE = 7  # GPIO  4, broche enable du moteur 1
 LEFT_FORWARDS = 0  # GPIO 17, entree 1 du moteur 1
 LEFT_BACKWARDS = 3  # GPIO 22, entree 2 du moteur 1
@@ -15,9 +13,9 @@ RIGHT_ENABLE = 5  # GPIO 24, broche enable du moteur 2
 RIGHT_FORWARDS = 6  # GPIO 25, entree 1 du moteur 2
 RIGHT_BACKWARDS = 4  # GPIO 23, entree 2 du moteur 2
 
-class motors(object):
+class pinout(object):
     def __init__(self, *args, **kwargs):
-        """ Constructeur : initialise les deux moteurs du robot """
+        """ Constructeur : initialise les pins du robot """
         try:
             wiringPiSetup()
 
@@ -35,9 +33,9 @@ class motors(object):
             softPwmCreate (LEFT_ENABLE, 0, DEFAULT_SPEED)
             softPwmCreate (RIGHT_ENABLE, 0, DEFAULT_SPEED)
 
-            print("Initialisation des moteurs : OK")
+            print("Initialisation des pins : OK")
         except:
-            print("ERREUR : L'initialisation des moteurs a echoue")
+            print("ERREUR : L'initialisation des pins a echoue")
         pass
         return super().__init__(*args, **kwargs)
 
