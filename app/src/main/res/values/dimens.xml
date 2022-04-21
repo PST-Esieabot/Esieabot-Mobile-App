@@ -2,4 +2,6 @@
 <resources>
     <dimen name="activity_horizontal_margin">20dp</dimen>
     <dimen name="activity_vertical_margin">10dp</dimen>
+    <dimen name="activity_control_btn">5dp</dimen>
+    <dimen name="activity_control_btn_size">75dp</dimen>
 </resources>

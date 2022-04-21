@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_connected_device_name"
-        style="@style/defaultTextStyle"
+        style="@style/small_titleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_robot_non_connected"

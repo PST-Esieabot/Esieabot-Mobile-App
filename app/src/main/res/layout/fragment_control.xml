@@ -88,12 +88,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v_view2"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_control_btn_size"
+        android:layout_height="@dimen/activity_control_btn_size"
+        android:background="@drawable/btn_navigation"
         android:src="@drawable/ic_control"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,44 +105,52 @@
 
     <ImageButton
         android:id="@+id/btn_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_control_btn_size"
+        android:layout_height="@dimen/activity_control_btn_size"
+        android:background="@drawable/btn_navigation"
         android:src="@drawable/ic_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_stop"
         app:layout_constraintTop_toBottomOf="@+id/wv_camera"
+        android:layout_marginEnd="@dimen/activity_control_btn"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
         android:id="@+id/btn_forwards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_control_btn_size"
+        android:layout_height="@dimen/activity_control_btn_size"
+        android:background="@drawable/btn_navigation"
         android:src="@drawable/ic_arrow_x"
         app:layout_constraintBottom_toTopOf="@+id/btn_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/activity_control_btn"
         tools:ignore="ContentDescription"/>
 
     <ImageButton
         android:id="@+id/btn_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_control_btn_size"
+        android:layout_height="@dimen/activity_control_btn_size"
+        android:background="@drawable/btn_navigation"
         android:src="@drawable/ic_arrow"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_stop"
         app:layout_constraintTop_toBottomOf="@+id/wv_camera"
+        android:layout_marginStart="@dimen/activity_control_btn"
         tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/btn_backwards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_control_btn_size"
+        android:layout_height="@dimen/activity_control_btn_size"
+        android:background="@drawable/btn_navigation"
         android:src="@drawable/ic_arrow_x"
         android:rotation="180"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_stop"
+        android:layout_marginTop="@dimen/activity_control_btn"
         tools:ignore="ContentDescription"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

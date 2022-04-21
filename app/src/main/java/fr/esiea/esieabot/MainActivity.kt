@@ -25,6 +25,7 @@ import fr.esiea.esieabot.popup.HelpPopup
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    // TODO : VERIFIER LIGHT/DARK THEME
 
     private val REQUEST_CODE = 2
     private val REQUEST_ENABLE_BT = 1
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     fun write(s: String) {
         if(bluetoothTask?.getState() != bluetoothTask?.STATE_CONNECTED) {
-            Toast.makeText(this, getString(R.string.toast_device_not_connected), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, getString(R.string.toast_device_not_connected), Toast.LENGTH_SHORT).show()
             return
         }
 

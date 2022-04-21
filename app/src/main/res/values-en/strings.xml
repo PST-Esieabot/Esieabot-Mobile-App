@@ -16,7 +16,7 @@
     <string name="settings_language">Language : En</string>
     <string name="settings_bug">Report a bug</string>
     <string name="settings_rights">All rights reserved ESIEA</string>
-    <string name="home_connected_to">"Connected to\r"</string>
+    <string name="home_connected_to">Connected to %1$s</string>
     <string name="deviceList_paired_devices">Paired devices</string>
     <string name="deviceList_available_devices">Available devices</string>
     <string name="toast_bluetooth_not_supported">Your device doesn\'t support Bluetooth</string>
@@ -37,7 +37,20 @@
     <string name="popup_connexion_title">Connect your robot</string>
     <string name="popup_control_title">Have fun!</string>
     <string name="popup_settings_title">Settings</string>
-    <string name="popup_connexion_text">First, click on the text \"Click to connect your robot\", the list of all your paired Bluetooth devices opens, then click on \"Esieabot\". If you have never connected your robot to the app, take a look below, it will surely appear in the list of available devices.</string>
-    <string name="popup_control_text">Now click on the control page (in the bottom navigation bar), all you have to do is play! Press one of the 4 arrows to steer the robot and watch the video preview in the box provided for this purpose.</string>
-    <string name="popup_settings_text">Do you speak english? Go to the \"option\" menu to change the app language by clicking on the \"Language: Fr\" text. A bug ? A question ? Ask it by clicking on \"Report a bug\" in the option page.</string>
+    <string name="popup_connexion_text">First, click on the text \"Click to connect your robot\", the list of all your paired Bluetooth devices opens, then click on \"esieabot\". If you have never connected your robot to the app, go to your phone\'s Bluetooth settings and appear the \"esieabot\".</string>
+    <string name="popup_control_text">Now click on the control page (in the bottom navigation bar), all you have to do is play! Press one of the 4 arrows to steer the robot and watch the video preview in the box provided for this purpose. First use? Go to the option page to configure your camera, just enter your wifi name and password, restart the robot and voila!</string>
+    <string name="popup_settings_text">You speak english? Go to the \"option\" menu to change the app language by clicking on the \"Language: Fr\" text. A bug ? A question ? Ask it by clicking on \"Report a bug\" in the option page.</string>
+    <string name="deviceList_title">Connection</string>
+    <string name="popup_connecting_to">Connection to %1$s</string>
+    <string name="popup_connecting">Loading…</string>
+    <string name="popup_return_home_title">Back home</string>
+    <string name="popup_return_home_in_progress">In progress…</string>
+    <string name="popup_configuration_title">Configuration</string>
+    <string name="popup_goto_settings">Go to the settings page to configure the camera</string>
+    <string name="popup_enter_SSID">Enter the name of your wifi network</string>
+    <string name="popup_enter_password">Enter the password</string>
+    <string name="popup_SSID">Network name</string>
+    <string name="popup_password">Password</string>
+    <string name="popup_reboot">Remember to restart your robot after configuring the wifi to apply the changes</string>
+    <string name="popup_confirm">Confirm</string>
 </resources>

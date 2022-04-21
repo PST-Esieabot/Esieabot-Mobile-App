@@ -17,6 +17,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import fr.esiea.esieabot.Constants
@@ -68,10 +69,6 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
 
         var start = 0L
         var keyPressedDuration = 0L
-
-        btnReturnHome.setOnClickListener {
-            returnHome(returnHomeList)
-        }
 
         btnForwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
@@ -140,15 +137,15 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         btnStop.setOnClickListener {
             context.write(Constants.STOP)
         }
+
+        // TODO : Lancer le Dialog pendant le chargement du retour a la maison
+        btnReturnHome.setOnClickListener {
+            //ReturnHomePopup(context, returnHomeList).show()
+            returnHome(returnHomeList)
+        }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun returnHome(buffer: ArrayList<ReturnHomeModel>) {
-
-        val returnHomePopup = ReturnHomePopup(context)
-        returnHomePopup.setMaxProgress(buffer.size)
-        returnHomePopup.show()
-
         for (item in buffer.reversed()) {
             when(item.action) {
                 Constants.FORWARDS -> {
@@ -164,7 +161,6 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
                     context.write(Constants.LEFT)
                 }
             }
-            returnHomePopup.incrementProgress()
 
             Thread.sleep(item.duration)
             context.write(Constants.STOP)
@@ -172,9 +168,7 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         }
 
         context.write(Constants.STOP)
-        returnHomeList.clear()
-
-        //returnHomePopup.dismiss()
+        buffer.clear()
     }
 
     @SuppressLint("SetTextI18n")
@@ -195,8 +189,7 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun loadCamera(IP: String, camera: WebView, ipAddress: TextView, cameraHiddenView: View, cameraStatus: TextView
-    ) {
+    private fun loadCamera(IP: String, camera: WebView, ipAddress: TextView, cameraHiddenView: View, cameraStatus: TextView) {
         ipAddress.text = viewModel.deviceIP + " IP"
         camera.loadUrl(IP)
 
@@ -228,10 +221,5 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
                 super.onReceivedError(view, request, error)
             }
         }
-    }
-
-    private fun customProgressDialog() {
-        val customDialog = Dialog(requireContext())
-
     }
 }

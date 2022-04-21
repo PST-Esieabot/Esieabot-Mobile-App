@@ -18,6 +18,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:indeterminate="false"
         android:progress="0"
+        android:max="100"
         android:progressBackgroundTint="@color/dark_purple"
         android:progressTint="@color/slate_blue"/>
 

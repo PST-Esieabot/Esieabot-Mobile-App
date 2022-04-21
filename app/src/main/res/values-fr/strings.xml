@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Esieabot</string>
 
     // Titre des pages
     <string name="title_home">Accueil</string>
@@ -7,45 +6,62 @@
     <string name="title_settings">Options</string>
 
     // Page d'accueil
-    <string name="home_title" translatable="false">esieabot</string>
     <string name="home_robot_non_connected">Robot non connecté</string>
     <string name="home_click_to_connect">Cliquez pour connecter votre robot</string>
-    <string name="home_connected_to">Connecté à\r</string>
+    <string name="home_connected_to">Connecté à %1$s</string>
 
     // Page de controle
     <string name="control_camera_not_connected">Caméra non connectée</string>
-    <string name="control_battery_percentage" translatable="false">%1$d %</string>
-    <string name="control_device_IP" translatable="false">IP</string>
 
     // Page d'option
     <string name="settings_language">Langue : Fr</string>
-    <string name="settings_bug">Signaler un bug</string>
+    <string name="settings_bug">Signalez un bug</string>
     <string name="settings_rights">Tout droit réservé ESIEA</string>
-    <string name="settings_version" translatable="false">Version</string>
-    <string name="settings_versionName" translatable="false"> </string>
 
     // Liste d'appareil connecté
     <string name="deviceList_paired_devices">Périphériques appairés</string>
     <string name="deviceList_available_devices">Appareils disponibles</string>
     <string name="deviceList_no_device_found">Aucun appareil trouvé</string>
+    <string name="deviceList_title">Connexion</string>
 
+    // Ecran de chargement
     <string name="progressDialog_connecting_to">Connexion à %1$s</string>
-    <string name="progressDialog_loading">Chargement</string>
+    <string name="progressDialog_loading">Chargement…</string>
 
-    // Page d'aide
+    // Popup chargement
+    <string name="popup_connecting_to">Connexion à %1$s</string>
+    <string name="popup_connecting">Chargement…</string>
+
+    // Popup return home
+    <string name="popup_return_home_title">Retour à la maison</string>
+    <string name="popup_return_home_in_progress">En cours…</string>
+
+    // Popup d'aide
     <string name="popup_need_help">Besoin d\'aide ? </string>
     <string name="popup_understood">J\'ai compris !</string>
     <string name="popup_first_connection">Première utilisation ?\nLaisse toi guider !</string>
     <string name="popup_connexion_title">Connectez votre robot</string>
     <string name="popup_control_title">Amusez vous!</string>
     <string name="popup_settings_title">Options</string>
-    <string name="popup_connexion_text">"Premièrement, cliquez sur le texte \"Cliquez pour connecter votre robot\", la liste de tous vos appareils Bluetooth appairés s'ouvre, cliquez ensuite sur \"Esieabot\". Si vous n'avez jamais connecté votre robot à l'appli, jetez un coup en bas, il apparaitra surement dans la liste des appareils disponibles. "</string>
-    <string name="popup_control_text">"Cliquez maintenant sur la page de contrôle (dans la barre de navigation tout en bas), il ne vous reste plus qu'à jouer ! Appuyez sur l'une des 4 flèches pour diriger le robot et regardez l'aperçu vidéo dans l'encart prévu à cet effet. "</string>
-    <string name="popup_settings_text">You speak english ? Go to the \"option\" menu to change the app language by clicking on the \"Langue : Fr\" text. \nUn bug ? Une question ? Posez la en cliquant sur \"Signaler un bug\" dans la page d\'option.</string>
+    <string name="popup_connexion_text">"Premièrement, cliquez sur le texte \"Cliquez pour connecter votre robot\", la liste de tous vos appareils Bluetooth appairés s'ouvre, cliquez ensuite sur \"esieabot\". Si vous n'avez jamais connecté votre robot à l'appli, allez dans les paramètres Bluetooth de votre téléphone et apparaillez l'\"esieabot\". "</string>
+    <string name="popup_control_text">"Cliquez maintenant sur la page de contrôle (dans la barre de navigation tout en bas), il ne vous reste plus qu'à jouer ! Appuyez sur l\'une des 4 flèches pour diriger le robot et regardez l\'aperçu vidéo dans l'encart prévu à cet effet. Première utilisation? Allez dans la page d'option pour configurer votre caméra, il suffit d\'entrer le nom et le mot de passe de votre wifi, redémarrez le robot et le tour est joué! "</string>
+    <string name="popup_settings_text">You speak english ? Go to the \"option\" menu to change the app language by clicking on the \"Langue : Fr\" text. \nUn bug ? Une question ? Posez la en cliquant sur \"Signalez un bug\" dans la page d\'option.</string>
+
+    // Popup d'aide de connexion
+    <string name="popup_goto_settings">Allez à la page d\'option pour configurer la caméra</string>
+
+    // Popup configuration wifi
+    <string name="popup_configuration_title">Configuration</string>
+    <string name="popup_enter_SSID">Entrez le nom de votre réseau wifi</string>
+    <string name="popup_enter_password">Entrez le mot de passe</string>
+    <string name="popup_SSID">Nom du réseau</string>
+    <string name="popup_password">Mot de passe</string>
+    <string name="popup_reboot">Pensez à redémarrer votre robot après avoir configurer le wifi pour appliquer les changements</string>
+    <string name="popup_confirm">Confirmer</string>
 
     // Toast
     <string name="toast_bluetooth_not_supported">Votre appareil ne supporte pas le bluetooth</string>
-    <string name="toast_no_paired_device_found">Aucun périphérique appairés trouvé</string>
+    <string name="toast_no_paired_device_found">Aucun périphérique appairé trouvé</string>
     <string name="toast_work_in_progress">En cours de développement</string>
     <string name="toast_connected">Connecté</string>
     <string name="toast_deconnected">Déconnecté</string>
