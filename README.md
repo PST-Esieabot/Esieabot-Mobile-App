@@ -15,7 +15,7 @@ Elle permet entre autre:
 ### The app is also avaible in English
 
 # Installation
-Rien de plus simple !
+Rien de plus simple ! Téléchargez [la dernière version](https://github.com/PST-Esieabot/Esieabot-Mobile-App/releases/tag/v1.3) de l'appli et de l'OS
 
 ## Robot
 Monter l'image disque *esieabot.img* avec votre logiciel favoris (ex: [Raspberry Pi Imager](https://www.raspberrypi.com/software/) ou [Rufus](https://rufus.ie/fr/)).
@@ -25,7 +25,7 @@ Nous vous avons grandement simplifier le travail pour que vous n'ayez rien d'aut
 Téléchargez le fichier *esieabot.apk* et installez-le sur votre smartphone Android.
 >Attention, l'application est seulement disponible pour les smartphones Android.
 
-Vous voyez, rien de comliqué !
+Vous voyez, rien de compliqué !
 
 # A propos de ce projet
 Pour compléter nos études d'ingénieurs, nous devons réaliser un Projet Scientifique et Technique. Nous avons donc choisi parmi de nombreux PST l'application mobile [ESIEABOT](https://esieabot.esiea.fr/).
