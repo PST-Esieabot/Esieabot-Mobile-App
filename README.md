@@ -7,20 +7,25 @@ Elle permet entre autre:
 - La visualisation de la caméra en direct
 - Une fonction retour à la maison
 - Un guide d'utilisation
+- Appaireillage automatique avec un nouveau robot
+- Configuration du wifi du robot via l'appli
 
 <br/>*Restez à l'écoute de l'avancement du projet car de nouvelles fonctionnalités arrivent régulièrement !*
 
 ### The app is also avaible in English
 
 # Installation
+Rien de plus simple !
+
 ## Robot
-Installez les 5 fichiers *.py* sur l'OS de votre robot, il ne vous reste plus qu'à lancer le fichier *main.py*. Vous pouvez aussi le faire démarrer automatiquement avec *esieabot.service*.
-<br/>Ces scripts ont été prévu pour une utilisation sur RaspberryPi OS.
+Monter l'image disque *esieabot.img* avec votre logiciel favoris (ex: [Raspberry Pi Imager](https://www.raspberrypi.com/software/) ou [Rufus](https://rufus.ie/fr/)).
+Nous vous avons grandement simplifier le travail pour que vous n'ayez rien d'autre à faire sur le robot ! Tout se passe maintenant sur l'appli.
 
 ## L'application
 Téléchargez le fichier *esieabot.apk* et installez-le sur votre smartphone Android.
 >Attention, l'application est seulement disponible pour les smartphones Android.
 
+Vous voyez, rien de comliqué !
 
 # A propos de ce projet
 Pour compléter nos études d'ingénieurs, nous devons réaliser un Projet Scientifique et Technique. Nous avons donc choisi parmi de nombreux PST l'application mobile [ESIEABOT](https://esieabot.esiea.fr/).
