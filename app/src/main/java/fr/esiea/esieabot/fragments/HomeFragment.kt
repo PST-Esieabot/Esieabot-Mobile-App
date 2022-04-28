@@ -50,10 +50,8 @@ class HomeFragment(private val context: MainActivity) : Fragment() {
             transaction.commit()
         }
 
-        requireActivity().registerReceiver(signalReceiver, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
-
-        // TODO : passer a action found pour gerer la deconnection
-        //requireActivity().registerReceiver(signalReceiver, IntentFilter(BluetoothDevice.ACTION_FOUND))
+        requireActivity().registerReceiver(connectedReceiver, IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED))
+        requireActivity().registerReceiver(disconnectedReceiver, IntentFilter(BluetoothDevice.ACTION_ACL_DISCONNECTED))
 
         connectedDevice = view.findViewById(R.id.tv_connected_device_name)
 
@@ -62,45 +60,30 @@ class HomeFragment(private val context: MainActivity) : Fragment() {
 
     }
 
-    private val signalReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+    private val connectedReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         @SuppressLint("MissingPermission")
         override fun onReceive(context: Context?, intent: Intent) {
-            val action = intent.action
-            if (BluetoothDevice.ACTION_ACL_CONNECTED == action) {
-
-                // Recupere l'appareil connecté
+            if (BluetoothDevice.ACTION_ACL_CONNECTED == intent.action) {
                 val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
 
-                // Enregistre le nom dans le viewModel
                 viewModel.deviceName = device?.name.toString()
-                // Affiche le nom de l'appareil
                 connectedDevice.text = getString(R.string.home_connected_to, device!!.name)
             }
-            if (BluetoothDevice.ACTION_ACL_DISCONNECTED == action) {
+        }
+    }
+    private val disconnectedReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        @SuppressLint("MissingPermission")
+        override fun onReceive(context: Context?, intent: Intent) {
+            if (BluetoothDevice.ACTION_ACL_DISCONNECTED == intent.action) {
                 connectedDevice.text = getString(R.string.home_robot_non_connected)
                 viewModel.deviceName = Constants.DEVICE_NAME
             }
         }
     }
 
-    /*
-    private val signalReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        @SuppressLint("MissingPermission")
-        override fun onReceive(context: Context?, intent: Intent) {
-            when(intent.action) {
-                BluetoothDevice.ACTION_ACL_CONNECTED -> {
-                    val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-
-                    // Enregistre le nom dans le viewModel
-                    viewModel.deviceName = device?.name.toString()
-                    connectedDevice.text = getString(R.string.home_connected_to, device!!.name)
-                }
-                BluetoothDevice.ACTION_ACL_DISCONNECTED -> {
-                    connectedDevice.text = getString(R.string.home_robot_non_connected)
-                    viewModel.deviceName = Constants.DEVICE_NAME
-                }
-            }
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().unregisterReceiver(connectedReceiver)
+        requireActivity().unregisterReceiver(disconnectedReceiver)
     }
-     */
 }

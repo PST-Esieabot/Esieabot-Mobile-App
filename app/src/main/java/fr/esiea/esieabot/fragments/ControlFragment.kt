@@ -1,7 +1,6 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -17,7 +16,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import fr.esiea.esieabot.Constants
@@ -26,7 +24,6 @@ import fr.esiea.esieabot.R
 import fr.esiea.esieabot.model.FragmentModel
 import fr.esiea.esieabot.model.ReturnHomeModel
 import fr.esiea.esieabot.popup.HelpConnectPopup
-import fr.esiea.esieabot.popup.ReturnHomePopup
 import kotlin.collections.ArrayList
 
 

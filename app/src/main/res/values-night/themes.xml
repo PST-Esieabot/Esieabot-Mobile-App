@@ -20,14 +20,38 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
+    <style name="black_defaultTextStyle" parent="defaultTextStyle">
+        <item name="android:textColor">@color/dark_purple</item>
+    </style>
+
     <style name="subtitleTextStyle" parent="defaultTextStyle">
         <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="black_subtitleTextStyle" parent="subtitleTextStyle">
+        <item name="android:textColor">@color/dark_purple</item>
     </style>
 
     <style name="titleTextStyle" parent="defaultTextStyle">
         <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="black_titleTextStyle" parent="titleTextStyle">
+        <item name="android:textColor">@color/dark_purple</item>
+    </style>
+
+    <style name="middle_titleTextStyle" parent="titleTextStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="small_titleTextStyle" parent="titleTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="small_black_titleTextStyle" parent="small_titleTextStyle">
+        <item name="android:textColor">@color/dark_purple</item>
     </style>
 
     <style name="bottomNavStyle" parent="Widget.Design.BottomNavigationView">
