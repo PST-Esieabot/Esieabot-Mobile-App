@@ -16,6 +16,9 @@
     <string name="control_camera_not_connected">Caméra non connectée</string>
     <string name="control_battery_percentage" translatable="false">%1$d %</string>
     <string name="control_device_IP" translatable="false">IP</string>
+    <string name="control_ultrasound_activated">Ultrason activé</string>
+    <string name="control_ultrasound_off">Ultrason désactivé</string>
+    <string name="control_scan">Scan en cours…</string>
 
     // Page d'option
     <string name="settings_language">Langue : Fr</string>

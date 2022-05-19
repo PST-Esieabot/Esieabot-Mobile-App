@@ -16,6 +16,7 @@ interface Constants {
 
         const val ULTRASOUND_ON = "ultrasound_ON"
         const val ULTRASOUND_OFF = "ultrasound_OFF"
+        const val SCAN = "scan"
 
         const val DEVICE_NAME = "device_name"
         const val DEVICE_IP = "000.000.0.00"

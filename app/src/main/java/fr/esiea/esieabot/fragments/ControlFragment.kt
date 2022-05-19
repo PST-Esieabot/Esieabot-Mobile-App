@@ -1,6 +1,7 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -150,11 +151,25 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         btnUltrasoundActivation.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 context.write(Constants.ULTRASOUND_ON)
-                Toast.makeText(requireContext(), "Ultrason activé", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.control_ultrasound_activated), Toast.LENGTH_SHORT).show()
             } else {
                 context.write(Constants.ULTRASOUND_OFF)
-                Toast.makeText(requireContext(), "Ultrason désactivé", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.control_ultrasound_off), Toast.LENGTH_SHORT).show()
             }
+        }
+
+        btnRectange.setOnClickListener {
+            for (i in 1..4) {
+                context.write(Constants.FORWARDS)
+                Thread.sleep(3000)
+                context.write(Constants.RIGHT)
+                Thread.sleep(1000)
+            }
+        }
+
+        btnScan.setOnClickListener {
+            context.write(Constants.SCAN)
+            Toast.makeText(requireContext(), getString(R.string.control_scan), Toast.LENGTH_SHORT).show()
         }
     }
 
