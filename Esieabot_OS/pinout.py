@@ -2,7 +2,9 @@
 # https://github.com/WiringPi/WiringPi-Python
 # https://github.com/gaetanvetillard/ESIEABot-Keyboard
 
+from re import T
 from wiringpi import *
+import time
 
 # Constantes
 DEFAULT_SPEED = 100
@@ -12,6 +14,9 @@ LEFT_BACKWARDS = 3  # GPIO 22, entree 2 du moteur 1
 RIGHT_ENABLE = 5  # GPIO 24, broche enable du moteur 2
 RIGHT_FORWARDS = 6  # GPIO 25, entree 1 du moteur 2
 RIGHT_BACKWARDS = 4  # GPIO 23, entree 2 du moteur 2
+
+TRIG = 27   # GPIO  16
+ECHO = 25   # GPIO  26
 
 class pinout(object):
     def __init__(self, *args, **kwargs):
@@ -33,6 +38,12 @@ class pinout(object):
             softPwmCreate (LEFT_ENABLE, 0, DEFAULT_SPEED)
             softPwmCreate (RIGHT_ENABLE, 0, DEFAULT_SPEED)
 
+            # Initialisation capteur ultrason
+            pinMode(TRIG, 1)
+            pinMode(ECHO, 0)
+
+            self.distance = 100
+
             print("Initialisation des pins : OK")
         except:
             print("ERREUR : L'initialisation des pins a echoue")
@@ -42,6 +53,24 @@ class pinout(object):
 
     def __del__(self):
         self.stop()
+
+    def calculateDistance(self):
+        while True:
+            digitalWrite(TRIG, 1)
+            time.sleep(0.00001)
+            digitalWrite(TRIG, 0)
+
+            while digitalRead(ECHO) == 0:
+                pulse_start = time.time()
+
+            while digitalRead(ECHO) == 1:
+                pulse_end = time.time()
+
+            pulse_duration = pulse_end - pulse_start
+            distance = round(pulse_duration * 17150, 2)
+
+            self.distance = distance
+            time.sleep(1)
 
     def leftForwards(self, speed):
         softPwmWrite(LEFT_ENABLE, speed)

@@ -8,7 +8,7 @@ import picamera
 import threading
 import urllib.request as urllib2
 
-OS_VERSION = 1.3
+OS_VERSION = 1.4
 
 def main():
 

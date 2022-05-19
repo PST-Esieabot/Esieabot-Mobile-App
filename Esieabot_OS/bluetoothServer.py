@@ -6,6 +6,7 @@ import settings as s
 import os
 import time
 import settings
+import threading
 
 DEFAULT_SPEED = 100
 
@@ -71,6 +72,8 @@ class bluetoothServer(object):
     def connected(self, client_sock, server_sock):
         """ Gere la connexion bluetooth """
         self.connectionState = STATE_CONNECTED
+        sensorActivated = False
+
         try:
             while True:
                 bytedata = client_sock.recv(1024)
@@ -80,25 +83,44 @@ class bluetoothServer(object):
                 data = data.rstrip("\n").rstrip("\r")
                 print("Donnees recus : [%s]" % data)
 
-                if data == "forwards":
+                if data == "forwards" and self.robot.distance > 10:
                     self.robot.forwards(DEFAULT_SPEED)
                     print("Avancer")
+
                 if data == "backwards":
                     self.robot.backwards(DEFAULT_SPEED)
                     print("Reculer")
+
                 if data == "left":
                     self.robot.leftSpin(DEFAULT_SPEED)
                     print("Gauche")
+
                 if data == "right":
                     self.robot.rightSpin(DEFAULT_SPEED)
                     print("Droite")
+
                 if data == "stop":
                     self.robot.stop()
                     print("Stop")
+
                 if data[0] == 'w':
                     SSID = self.settings.getSSID(data)
                     password = self.settings.getPassword(data)
                     self.settings.createWifiConfig(SSID, password)
+
+                if data == "ultrasound_ON":
+                    self.ultrasonicSensorThread = threading.Thread(target = self.robot.calculateDistance)
+                    self.ultrasonicSensorThread.start()
+                    sensorActivated = True
+
+                if data == "ultrasound_OFF" and sensorActivated == True:
+                    self.ultrasonicSensorThread.join()
+                    self.robot.distance = 100
+                    sensorActivated = False
+
+                if data == "scan":
+                    self.robot.forward()
+
 
         except IOError:
             self.connectionLost(client_sock, server_sock)
@@ -111,6 +133,11 @@ class bluetoothServer(object):
         print("\nConnexion perdu")
 
         self.robot.stop()
+
+        try:
+            self.ultrasonicSensorThread.join()
+        except:
+            pass
 
         client_sock.close()
         server_sock.close()
