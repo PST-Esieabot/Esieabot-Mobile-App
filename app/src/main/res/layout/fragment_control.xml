@@ -79,6 +79,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wv_camera" />
 
+    <ToggleButton
+        android:id="@+id/btn_ultrasoundActivation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_ultrasound_activation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v_view2"
+        android:textOn=""
+        android:textOff=""
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/btn_scan"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_control"
+        android:src="@drawable/ic_btn_scan"
+        app:layout_constraintStart_toEndOf="@+id/btn_ultrasoundActivation"
+        app:layout_constraintTop_toBottomOf="@+id/v_view2"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/btn_tmp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_control"
+        app:layout_constraintStart_toEndOf="@+id/btn_scan"
+        app:layout_constraintTop_toBottomOf="@+id/v_view2"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/btn_triangle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_control"
+        app:layout_constraintEnd_toStartOf="@+id/btn_rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/v_view2"
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/btn_rectangle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/btn_control"
+        android:src="@drawable/ic_btn_rectangle"
+        app:layout_constraintEnd_toStartOf="@+id/btn_return_home"
+        app:layout_constraintTop_toBottomOf="@+id/v_view2"
+        tools:ignore="ContentDescription" />
+
     <ImageButton
         android:id="@+id/btn_return_home"
         android:layout_width="40dp"

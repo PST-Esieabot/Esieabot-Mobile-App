@@ -14,6 +14,9 @@ interface Constants {
         const val RIGHT = "right"
         const val STOP = "stop"
 
+        const val ULTRASOUND_ON = "ultrasound_ON"
+        const val ULTRASOUND_OFF = "ultrasound_OFF"
+
         const val DEVICE_NAME = "device_name"
         const val DEVICE_IP = "000.000.0.00"
         const val TOAST = "toast"

@@ -16,6 +16,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import fr.esiea.esieabot.Constants
@@ -51,7 +53,11 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         val cameraView = view.findViewById<WebView>(R.id.wv_camera)
         val cameraHiddenView = view.findViewById<View>(R.id.v_camera_hidden)
         val cameraStatus = view.findViewById<TextView>(R.id.tv_camera_status)
+
         val btnReturnHome = view.findViewById<ImageButton>(R.id.btn_return_home)
+        val btnRectange = view.findViewById<ImageButton>(R.id.btn_rectangle)
+        val btnScan = view.findViewById<ImageButton>(R.id.btn_scan)
+        val btnUltrasoundActivation = view.findViewById<ToggleButton>(R.id.btn_ultrasoundActivation)
 
         // Met a jour le pourcentage de batterie
         updateBatteryLevel(view)
@@ -139,6 +145,16 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         btnReturnHome.setOnClickListener {
             //ReturnHomePopup(context, returnHomeList).show()
             returnHome(returnHomeList)
+        }
+
+        btnUltrasoundActivation.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                context.write(Constants.ULTRASOUND_ON)
+                Toast.makeText(requireContext(), "Ultrason activé", Toast.LENGTH_SHORT).show()
+            } else {
+                context.write(Constants.ULTRASOUND_OFF)
+                Toast.makeText(requireContext(), "Ultrason désactivé", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
