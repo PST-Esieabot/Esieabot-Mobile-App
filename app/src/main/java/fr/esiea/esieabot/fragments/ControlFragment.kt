@@ -1,7 +1,6 @@
 package fr.esiea.esieabot.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -72,18 +71,18 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         }
 
         var start = 0L
-        var keyPressedDuration = 0L
+        var keyPressedDuration: Long
 
         btnForwards.setOnTouchListener { v: View, event: MotionEvent ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.FORWARDS)
-                    start = System.currentTimeMillis();
+                    start = System.currentTimeMillis()
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
 
-                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    keyPressedDuration = (System.currentTimeMillis() - start)
                     returnHomeList.add(ReturnHomeModel(Constants.FORWARDS, keyPressedDuration))
                 }
             }
@@ -94,12 +93,12 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.BACKWARDS)
-                    start = System.currentTimeMillis();
+                    start = System.currentTimeMillis()
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
 
-                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    keyPressedDuration = (System.currentTimeMillis() - start)
                     returnHomeList.add(ReturnHomeModel(Constants.BACKWARDS, keyPressedDuration))
                 }
             }
@@ -110,12 +109,12 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.LEFT)
-                    start = System.currentTimeMillis();
+                    start = System.currentTimeMillis()
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
 
-                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    keyPressedDuration = (System.currentTimeMillis() - start)
                     returnHomeList.add(ReturnHomeModel(Constants.LEFT, keyPressedDuration))
                 }
             }
@@ -126,12 +125,12 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     context.write(Constants.RIGHT)
-                    start = System.currentTimeMillis();
+                    start = System.currentTimeMillis()
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     context.write(Constants.STOP)
 
-                    keyPressedDuration = (System.currentTimeMillis() - start);
+                    keyPressedDuration = (System.currentTimeMillis() - start)
                     returnHomeList.add(ReturnHomeModel(Constants.RIGHT, keyPressedDuration))
                 }
             }
@@ -161,9 +160,9 @@ class ControlFragment(private val context: MainActivity) : Fragment() {
         btnRectange.setOnClickListener {
             for (i in 1..4) {
                 context.write(Constants.FORWARDS)
-                Thread.sleep(3000)
-                context.write(Constants.RIGHT)
                 Thread.sleep(1000)
+                context.write(Constants.RIGHT)
+                Thread.sleep(500)
             }
         }
 
