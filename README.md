@@ -17,7 +17,7 @@ Elle permet entre autre:
 ### The app is also avaible in English
 
 # Installation
-Rien de plus simple ! Téléchargez [la dernière version](https://github.com/PST-Esieabot/Esieabot-Mobile-App/releases/tag/v1.3) de l'appli et de l'OS
+Rien de plus simple ! Téléchargez [la dernière version](https://github.com/PST-Esieabot/Esieabot-Mobile-App/releases/tag/v1.4) de l'appli et de l'OS
 
 ## Robot
 Monter l'image disque *esieabot.img* avec votre logiciel favoris (ex: [Raspberry Pi Imager](https://www.raspberrypi.com/software/) ou [Rufus](https://rufus.ie/fr/)).
