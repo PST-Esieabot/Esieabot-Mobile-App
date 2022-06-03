@@ -121,6 +121,3 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     def __init__(self, address, handler, output):
         handler.output = output
         super().__init__(address, handler)
-
-#Nathan
-#wlkl7662

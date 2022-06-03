@@ -16,7 +16,7 @@ STATE_CONNECTED = 2
 STATE_CONNECTION_LOST = 3
 
 class bluetoothServer(object):
-    def __init__(self, isCamera, deviceIP = 0, robot = None, *args, **kwargs):
+    def __init__(self, isCamera, deviceIP = None, robot = None, *args, **kwargs):
         """ constructeur : initialise le serveur bluetooth """
         try:
             self.isCamera = isCamera
@@ -54,7 +54,7 @@ class bluetoothServer(object):
 
         # Permet d'indiquer que le robot est pret pour une connexion
         self.robot.forwards(DEFAULT_SPEED)
-        time.sleep(0.05)
+        time.sleep(0.07)
         self.robot.stop()
 
         print("\nEn attente de connexion sur le port RFCOMM %d" % port)
@@ -64,7 +64,10 @@ class bluetoothServer(object):
 
         # Envoie l'adresse IP du robot a l'appareil connecte
         if(self.isCamera == True):
-            client_sock.send(self.deviceIP.encode())
+            try:
+                client_sock.send(self.deviceIP.encode())
+            except:
+                pass
 
         self.connected(client_sock, server_sock)
 
@@ -83,43 +86,38 @@ class bluetoothServer(object):
                 data = data.rstrip("\n").rstrip("\r")
                 print("Donnees recus : [%s]" % data)
 
-                if data == "forwards" and self.robot.distance > 10:
+                if data == "forwards":
                     self.robot.forwards(DEFAULT_SPEED)
-                    print("Avancer")
 
                 if data == "backwards":
                     self.robot.backwards(DEFAULT_SPEED)
-                    print("Reculer")
 
                 if data == "left":
                     self.robot.leftSpin(DEFAULT_SPEED)
-                    print("Gauche")
 
                 if data == "right":
                     self.robot.rightSpin(DEFAULT_SPEED)
-                    print("Droite")
 
                 if data == "stop":
                     self.robot.stop()
-                    print("Stop")
 
                 if data[0] == 'w':
                     SSID = self.settings.getSSID(data)
                     password = self.settings.getPassword(data)
                     self.settings.createWifiConfig(SSID, password)
 
-                if data == "ultrasound_ON":
+                if data == "ultrasound_ON" and self.robot.activated == False:
+                    self.robot.activated = True
                     self.ultrasonicSensorThread = threading.Thread(target = self.robot.calculateDistance)
                     self.ultrasonicSensorThread.start()
-                    sensorActivated = True
 
-                if data == "ultrasound_OFF" and sensorActivated == True:
-                    self.ultrasonicSensorThread.join()
+                if data == "ultrasound_OFF" and self.robot.activated == True:
+                    self.robot.activated = False
                     self.robot.distance = 100
-                    sensorActivated = False
+                    self.ultrasonicSensorThread.join()
 
-                if data == "scan":
-                    self.robot.forward()
+                if data == "scan" and self.robot.activated == True:
+                    self.robot.forward(DEFAULT_SPEED)
 
 
         except IOError:

@@ -2,18 +2,17 @@
 # https://github.com/WiringPi/WiringPi-Python
 # https://github.com/gaetanvetillard/ESIEABot-Keyboard
 
-from re import T
 from wiringpi import *
 import time
 
 # Constantes
 DEFAULT_SPEED = 100
 LEFT_ENABLE = 7  # GPIO  4, broche enable du moteur 1
-LEFT_FORWARDS = 0  # GPIO 17, entree 1 du moteur 1
-LEFT_BACKWARDS = 3  # GPIO 22, entree 2 du moteur 1
+LEFT_FORWARDS = 3  # GPIO 17, entree 1 du moteur 1
+LEFT_BACKWARDS = 0  # GPIO 22, entree 2 du moteur 1
 RIGHT_ENABLE = 5  # GPIO 24, broche enable du moteur 2
-RIGHT_FORWARDS = 6  # GPIO 25, entree 1 du moteur 2
-RIGHT_BACKWARDS = 4  # GPIO 23, entree 2 du moteur 2
+RIGHT_FORWARDS = 4  # GPIO 25, entree 1 du moteur 2
+RIGHT_BACKWARDS = 6  # GPIO 23, entree 2 du moteur 2
 
 TRIG = 27   # GPIO  16
 ECHO = 25   # GPIO  26
@@ -39,10 +38,10 @@ class pinout(object):
             softPwmCreate (RIGHT_ENABLE, 0, DEFAULT_SPEED)
 
             # Initialisation capteur ultrason
+            self.distance = 100
+            self.activated = False
             pinMode(TRIG, 1)
             pinMode(ECHO, 0)
-
-            self.distance = 100
 
             print("Initialisation des pins : OK")
         except:
@@ -55,7 +54,7 @@ class pinout(object):
         self.stop()
 
     def calculateDistance(self):
-        while True:
+        while self.activated == True:
             digitalWrite(TRIG, 1)
             time.sleep(0.00001)
             digitalWrite(TRIG, 0)
@@ -70,7 +69,7 @@ class pinout(object):
             distance = round(pulse_duration * 17150, 2)
 
             self.distance = distance
-            time.sleep(1)
+            time.sleep(0.5)
 
     def leftForwards(self, speed):
         softPwmWrite(LEFT_ENABLE, speed)
@@ -93,6 +92,10 @@ class pinout(object):
         digitalWrite(RIGHT_BACKWARDS, 1)
 
     def forwards(self, speed):
+        if self.activated == True and self.distance < 7:
+            self.stop()
+            return
+        
         self.leftForwards(speed)
         self.rightForwards(speed)
 
@@ -101,12 +104,12 @@ class pinout(object):
         self.rightBackwards(speed)
 
     def leftSpin(self, speed):
-        self.rightForwards(speed)
-        self.leftBackwards(speed)
-
-    def rightSpin(self, speed):
         self.leftForwards(speed)
         self.rightBackwards(speed)
+
+    def rightSpin(self, speed):
+        self.rightForwards(speed)
+        self.leftBackwards(speed)
 
     def stop(self):
         softPwmWrite(LEFT_ENABLE, 0)
