@@ -6,6 +6,8 @@ Elle permet entre autre:
 - Le contrôle du robot via 4 flèches directionnelles
 - La visualisation de la caméra en direct
 - Une fonction retour à la maison
+- Activation du capteur ultrason
+- Fonction scan de la pièce
 - Un guide d'utilisation
 - Appaireillage automatique avec un nouveau robot
 - Configuration du wifi du robot via l'appli
